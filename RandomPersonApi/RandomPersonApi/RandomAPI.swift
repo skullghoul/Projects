@@ -15,10 +15,15 @@ class RandomAPI {
     
     class RandomAPIController {
         
-        func fetchRandomUser() async throws -> Response {
-            let urlComponents = URLComponents(string: "https://randomuser.me/api/")
+        func fetchRandomUser(userAmount: Int, _ searchParameters: [String]) async throws -> Response {
+            let url = URL(string:         "https://randomuser.me/api/?inc=name,picture,\(searchParameters.joined(separator: ","))&results=\(userAmount)")
             
-            let (data, response) = try await URLSession.shared.data(from: (urlComponents?.url)!)
+
+            let (data, response) = try await URLSession.shared.data(from: url!)
+            
+            print()
+            print()
+            print(String(data: data, encoding: .utf8)!)
             
             guard let httpResponse = response as? HTTPURLResponse,
                   httpResponse.statusCode == 200 else {
@@ -27,6 +32,7 @@ class RandomAPI {
             
             let jsonDecoder = JSONDecoder()
             let person = try jsonDecoder.decode(Response.self, from: data)
+            print(person)
             return person // fixed error: use value without parentheses
         }
         
@@ -51,30 +57,3 @@ class RandomAPI {
 }
 
 
-
-//class RandomApiController {
-//
-//    func fetchRandomUsers(completion: @escaping (Result<[RandomUser], Error>) -> Void) {
-//        let url = URL(string: "https://randomuser.me/api/")!
-//
-//        let task = URLSession.shared.dataTask(with: url) { data, response, error in
-//            guard let data = data else {
-//                completion(.failure(error ?? NSError(domain: "Unknown error", code: 0, userInfo: nil)))
-//                return
-//            }
-//
-//            do {
-//                let decoder = JSONDecoder()
-//                let response = try decoder.decode(Response.self, from: data)
-//                completion(.success(response.results))
-//            } catch {
-//                completion(.failure(error))
-//            }
-//        }
-//
-//        task.resume()
-//    }
-//}
-
-
- 

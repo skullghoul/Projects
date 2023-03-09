@@ -14,18 +14,18 @@ struct Response: Codable {
 }
 
 struct RandomUser: Codable {
-    let gender: String
+    let gender: String?
     let name: Name
-    let location: Location
-    let email: String
-    let login: Login
-    let dob: Dob
-    let registered: Registered
-    let phone: String
-    let cell: String
-    let id: Id
+    let location: Location?
+    let email: String?
+    let login: Login?
+    let dob: Dob?
+    let registered: Registered?
+    let phone: String?
+    let cell: String?
     let picture: Picture
-    let nat: String
+    let nat: String?
+    let id: ID?
 }
 
 struct Name: Codable {
@@ -39,8 +39,7 @@ struct Location: Codable {
     let city: String
     let state: String
     let country: String
-    let postcode: String
-    let coordinates: Coordinates
+    let coordinates: Coordinates?
     let timezone: Timezone
 }
 
@@ -50,8 +49,8 @@ struct Street: Codable {
 }
 
 struct Coordinates: Codable {
-    let latitude: String
-    let longitude: String
+    let latitude: String?
+    let longitude: String?
 }
 
 struct Timezone: Codable {
@@ -60,13 +59,13 @@ struct Timezone: Codable {
 }
 
 struct Login: Codable {
-    let uuid: String
-    let username: String
-    let password: String
-    let salt: String
-    let md5: String
-    let sha1: String
-    let sha256: String
+    let uuid: String?
+    let username: String?
+    let password: String?
+    let salt: String?
+    let md5: String?
+    let sha1: String?
+    let sha256: String?
 }
 
 struct Dob: Codable {
@@ -74,18 +73,19 @@ struct Dob: Codable {
     let age: Int
 }
 
-struct Registered: Codable {
-    let date: String
-    let age: Int
+struct ID: Codable {
+    let name: String?
+    let value: String?
 }
 
-struct Id: Codable {
-    let name: String
-    let value: String
+struct Registered: Codable {
+    let date: String?
+    let age: Int?
 }
+
 
 struct Picture: Codable {
-    let large: URL
+    let large: String
     let medium: String
     let thumbnail: String
 }
