@@ -7,20 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		36344EC429B9738600EC944B /* DataInputViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36344EC329B9738600EC944B /* DataInputViewController.swift */; };
 		3637AFD529B4780000110331 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3637AFD429B4780000110331 /* ContentView.swift */; };
 		3637AFD729B4780100110331 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3637AFD629B4780100110331 /* Assets.xcassets */; };
 		3637AFDA29B4780100110331 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3637AFD929B4780100110331 /* Preview Assets.xcassets */; };
 		3637AFE129B4786400110331 /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3637AFE029B4786400110331 /* FoodData.swift */; };
+		368977D229BB79820057123B /* FoodTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368977D129BB79820057123B /* FoodTrackerApp.swift */; };
+		368977D429BB7A2E0057123B /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368977D329BB7A2E0057123B /* SwiftUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		36344EC329B9738600EC944B /* DataInputViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataInputViewController.swift; sourceTree = "<group>"; };
 		3637AFCF29B4780000110331 /* FoodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3637AFD429B4780000110331 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		3637AFD629B4780100110331 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3637AFD929B4780100110331 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		3637AFE029B4786400110331 /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
+		368977D129BB79820057123B /* FoodTrackerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodTrackerApp.swift; sourceTree = "<group>"; };
+		368977D329BB7A2E0057123B /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -53,8 +55,9 @@
 		3637AFD129B4780000110331 /* FoodTracker */ = {
 			isa = PBXGroup;
 			children = (
+				368977D129BB79820057123B /* FoodTrackerApp.swift */,
 				3637AFD429B4780000110331 /* ContentView.swift */,
-				36344EC329B9738600EC944B /* DataInputViewController.swift */,
+				368977D329BB7A2E0057123B /* SwiftUIView.swift */,
 				3637AFE029B4786400110331 /* FoodData.swift */,
 				3637AFD629B4780100110331 /* Assets.xcassets */,
 				3637AFD829B4780100110331 /* Preview Content */,
@@ -140,9 +143,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				36344EC429B9738600EC944B /* DataInputViewController.swift in Sources */,
+				368977D229BB79820057123B /* FoodTrackerApp.swift in Sources */,
 				3637AFE129B4786400110331 /* FoodData.swift in Sources */,
 				3637AFD529B4780000110331 /* ContentView.swift in Sources */,
+				368977D429BB7A2E0057123B /* SwiftUIView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,6 +277,8 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FoodTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = PWTL37LPKK;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = arm64;
+				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -302,6 +308,7 @@
 				DEVELOPMENT_ASSET_PATHS = "\"FoodTracker/Preview Content\"";
 				DEVELOPMENT_TEAM = PWTL37LPKK;
 				ENABLE_PREVIEWS = YES;
+				EXCLUDED_ARCHS = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

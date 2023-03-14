@@ -7,9 +7,11 @@
 
 import Foundation
 
-struct FoodData: Codable {
+struct FoodData: Codable, Identifiable {
+    var idData = UUID()
     var id: String
     var food: String
     var amount: String
     var expirationDay: Int
 }
+
