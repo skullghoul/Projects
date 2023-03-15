@@ -9,7 +9,7 @@ import Foundation
 
 struct FoodData: Codable, Identifiable {
     var idData = UUID()
-    var id: String
+    var id: Int
     var food: String
     var amount: String
     var expirationDay: Int

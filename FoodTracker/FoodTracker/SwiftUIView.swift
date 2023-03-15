@@ -9,7 +9,7 @@ import SwiftUI
 
 struct SwiftUIView: View {
 
-    @State private var foodData = [FoodData]()
+    @Binding var foodData: [FoodData]
     @State private var dateValue = 1
     @State private var inputedInfo = ""
 
@@ -29,7 +29,7 @@ struct SwiftUIView: View {
     func dateAmount() {
         
         // Default value for the expiration
-        var expiration = "fresh"
+        var expiration = 0
 
         let date = Date()
         let dateFormatter = DateFormatter()
@@ -44,20 +44,28 @@ struct SwiftUIView: View {
         dateValue = daysDiff
 
         if dateValue == 0 {
-            expiration = "expired"
+            expiration = 0
         } else if dateValue <= 7 {
-            expiration = "going bad soon"
+            expiration = 1
         } else {
-            expiration = "fresh"
+            expiration = 2
         }
 
-        let item1 = FoodData(id: "expired", food: inputedInfo, amount: "3", expirationDay: dateValue)
-        let item2 = FoodData(id: "going bad soon", food: "foodItem.text", amount: "3", expirationDay: 5)
-        let item3 = FoodData(id: "fresh", food: "foodItem.text", amount: "3", expirationDay: 0)
+        let item1 = FoodData(id: 2, food: inputedInfo, amount: "3", expirationDay: dateValue)
+        let item2 = FoodData(id: 3, food: "foodItem.text", amount: "3", expirationDay: 5)
+        let item3 = FoodData(id: 4, food: "foodItem.text", amount: "3", expirationDay: 0)
 
-        var data: [FoodData] = [item1, item2, item3, FoodData(id: expiration, food: inputedInfo, amount: "2", expirationDay: 5)]
-            let foodInfo = FoodData(id: expiration, food: "foodItem.text", amount: "3", expirationDay: dateValue)
+        let data: [FoodData] = [item1, item2, item3]
+            let foodInfo = FoodData(id: 5, food: inputedInfo, amount: "3", expirationDay: expiration)
+        
         foodData.append(contentsOf: data)
+        print()
+        print(foodData)
+        print()
+        foodData.append(foodInfo)
+        print()
+        print(foodData)
+        print()
         print("after append foodData")
         
         print(foodData)
@@ -80,7 +88,7 @@ struct SwiftUIView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        SwiftUIView()
+        SwiftUIView(foodData: .constant([]))
     }
 }
 

@@ -14,12 +14,14 @@ struct ContentView: View {
     
     
     @State var presentSheet = false
-    
+//    @State var foodData: [FoodData]
+
     @State private var foodData = [
-        FoodData(id: "Going Bad soon", food: "Bananas", amount: "5", expirationDay: 1),
-        FoodData(id: "Expired", food: "Waffles", amount: "10", expirationDay: 2),
-        FoodData(id: "Expired", food: "Apples", amount: "3", expirationDay: 0),
-        FoodData(id: "fresh", food: "Milk", amount: "1", expirationDay: 2)
+        FoodData(id: 1, food: "Bananas", amount: "5", expirationDay: 1),
+        FoodData(id: 2, food: "Waffles", amount: "10", expirationDay: 2),
+        FoodData(id: 3, food: "Apples", amount: "3", expirationDay: 0),
+        FoodData(id: 4, food: "Milk", amount: "1", expirationDay: 2),
+        FoodData(id: 5, food: "Potato", amount: "5", expirationDay: 2)
     ]
     
     
@@ -37,51 +39,68 @@ struct ContentView: View {
                 return "Expired"
             }
         }
-        .mapValues(<#T##transform: ([FoodData]) throws -> T##([FoodData]) throws -> T#>)
     }
     
     
     var body: some View {
-
+        
         NavigationView {
-            
-            // - Creates a custom scrollable container
-            List {
-                // For each which grabs the dictionary data and loops through each of them and sorts them.
-                ForEach(groupedFoodData.keys.sorted(), id: \.self) { key in
-                    // - creates a new section within the list and assigns a header to the section that displays the current key value. basically takes the values and displays them based on the expiration day name
-                    Section(header: Text(key)) {
-                        // itterates over each of the items in the array that correspond to the 'key' or basically the name of the expiration and then executes the code within the curly brackets.
-                        ForEach(groupedFoodData[key]!, id: \.id) { food in
-                            // - This line of code creates a vertical stack view (VStack) that arranges two text views vertically. The first text view displays the name of the food, which is stored in the food property of the current item. The second text view displays the amount of the food that is left, which is stored in the amount property of the current item. The second text view is styled using a smaller font size and a gray color.
-                            VStack(alignment: .leading) {
-                                Text(food.food)
-                                Text("\(food.amount) left")
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
+            ZStack {
+                // - Creates a custom scrollable container
+                List {
+                    // For each which grabs the dictionary data and loops through each of them and sorts them.
+                    ForEach(groupedFoodData.keys.sorted(), id: \.self) { key in
+                        // - creates a new section within the list and assigns a header to the section that displays the current key value. basically takes the values and displays them based on the expiration day name
+                        Section(header: Text(key)) {
+                            // itterates over each of the items in the array that correspond to the 'key' or basically the name of the expiration and then executes the code within the curly brackets.
+                            ForEach(groupedFoodData[key]!, id: \.id) { food in
+                                // - This line of code creates a vertical stack view (VStack) that arranges two text views vertically. The first text view displays the name of the food, which is stored in the food property of the current item. The second text view displays the amount of the food that is left, which is stored in the amount property of the current item. The second text view is styled using a smaller font size and a gray color.
+                                VStack(alignment: .leading) {
+                                    Text(food.food)
+                                    Text("\(food.amount) left")
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                }
                             }
                         }
                     }
                     
                 }
-            }
-            // Button for when to tell the sheeet to present
-            .navigationBarTitle("Food Tracker")
-            .navigationBarItems(trailing:
-                Toggle(isOn: $presentSheet) {
-                    Text("Is Presenting?")
+                
+                .colorMultiply(.init("Color"))
+                .scrollContentBackground(.hidden)
+
+                
+                // Button for when to tell the sheeet to present
+                .navigationBarTitle("Food Tracker")
+                .navigationBarItems(trailing:
+                                        Toggle(isOn: $presentSheet) {
+                    Image("PlusOneButton", label: Text("Zander"))
+                        .resizable()
+                        .frame(width: 80, height: 80)
                     
                 }
-            )
-            // present sheet and makes the swiftui data appear
-            .sheet(isPresented: $presentSheet) {
-                SwiftUIView()
+                                    
+                )
+                // present sheet and makes the swiftui data appear
+                .sheet(isPresented: $presentSheet) {
+                    SwiftUIView(foodData: $foodData)
+                }
             }
+            .background {
+                Image("orangeRed")
+                    .resizable()
+                    .frame(width: 500, height: 1100)
+            }
+            
+            .navigationTitle("Hello")
+            
         }
-        .navigationTitle("Hello")
+        
     }
+    
 }
-
+    
 
 
 
@@ -132,6 +151,10 @@ struct ContentView: View {
 //}
 //
 //@State private var showPopUp = false
+
+
+
+
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
