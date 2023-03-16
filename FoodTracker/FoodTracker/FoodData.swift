@@ -10,8 +10,10 @@ import Foundation
 struct FoodData: Codable, Identifiable {
     var idData = UUID()
     var id: Int
+    var amountofDaysTillExpiration: Int
+    var calendarDate: Date
     var food: String
     var amount: String
-    var expirationDay: Int
+    var expirationNameValue: Int
 }
 

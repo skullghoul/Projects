@@ -16,24 +16,19 @@ struct ContentView: View {
     @State var presentSheet = false
 //    @State var foodData: [FoodData]
 
-    @State private var foodData = [
-        FoodData(id: 1, food: "Bananas", amount: "5", expirationDay: 1),
-        FoodData(id: 2, food: "Waffles", amount: "10", expirationDay: 2),
-        FoodData(id: 3, food: "Apples", amount: "3", expirationDay: 0),
-        FoodData(id: 4, food: "Milk", amount: "1", expirationDay: 2),
-        FoodData(id: 5, food: "Potato", amount: "5", expirationDay: 2)
-    ]
+    @State private var foodData = [FoodData]()
     
     
     var groupedFoodData: [String: [FoodData]] {
         Dictionary(grouping: foodData) { food in
-            switch food.expirationDay {
+            switch food.expirationNameValue {
             case 0:
                 print("fresh \(foodData)")
                 return "Fresh"
             case 1:
                 print("Going bad soon \(foodData)")
                 return "Going bad soon"
+                
             default:
                 print("Expired \(foodData)")
                 return "Expired"
@@ -46,6 +41,7 @@ struct ContentView: View {
         
         NavigationView {
             ZStack {
+                
                 // - Creates a custom scrollable container
                 List {
                     // For each which grabs the dictionary data and loops through each of them and sorts them.
