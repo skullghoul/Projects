@@ -104,59 +104,6 @@ struct ContentView: View {
     }
 }
 
-    
-
-
-
-
-//                  List {
-//                    ForEach(FoodData, id: \.self) { customer in
-//                      Section(header: Text(customer)) {
-//                        ForEach(self.sitesCollatedByCustomer[customer]!) { site in
-//                          Site
-//                        }
-//                      }
-//                    }
-//                  } // end of List
-//                    .navigationBarTitle(Text("Site Listing"))
-//                } // end of NavigationView
-
-
-
-// Pop up view
-//
-
-
-//MARK: navigate to second viewController
-//                NavigationLink {
-//                    SwiftUIView()
-//                } label: {
-//                    Text("firstView")
-//                }
-//
-//        }
-//
-//                    List {
-//                        ForEach(items, id: \.0) { sectionTitle, sectionItems in
-//                            Section(header: Text(sectionTitle)) {
-//                                ForEach(sectionItems, id: \.self) { item in
-//                                    Text(item)
-//                                }
-//                            }
-//                        }
-//                    }
-//
-//
-//
-//struct PopUpView: View {
-//    var body: some View {
-//        Text("This is a pop-up view!")
-//    }
-//}
-//
-//@State private var showPopUp = false
-
-
 
 
 

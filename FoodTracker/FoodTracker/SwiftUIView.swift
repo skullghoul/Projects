@@ -8,16 +8,17 @@
 import SwiftUI
 
 struct SwiftUIView: View {
-
-
+//    @Environment(\.managedObjectContext) var moc
+//    @FetchRequest(sortDescriptors: []) var students: FetchedResults<Student>
+    
     @State private var selectedDate = Date.now
-
-
+    
+    
     @Binding var foodData: [FoodData]
     @State private var dateValue = 1
     @State private var inputedInfo = ""
-
-
+    
+    
     var body: some View {
         VStack {
             HStack() {
@@ -35,30 +36,30 @@ struct SwiftUIView: View {
                 .pickerStyle(.inline)
         }
     }
-
-
-
+    
+    
+    
     func dateAmount() {
-
+        
         // Default value for the expiration
         var expiration = 0
-
+        
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         print(dateFormatter.string(from: date))
-
+        
         var changedString = dateFormatter.string(from: selectedDate)
         var future = dateFormatter.date(from: changedString)
         let timeDiff = future?.timeIntervalSinceNow
         let daysDiff = Int(timeDiff! / (24 * 60 * 60) + 1)
-
+        
         var id = foodData.count
         
         id += 1
         
         dateValue = daysDiff
-
+        
         if dateValue == 0 {
             expiration = 2
         } else if dateValue <= 7 {
@@ -68,24 +69,44 @@ struct SwiftUIView: View {
         } else {
             print("failed to find dateValue unexepected number \(dateValue)")
         }
-//
-//        let item1 = FoodData(id: 2, food: inputedInfo, amount: "3", expirationDay: dateValue)
-//        let item2 = FoodData(id: 3, food: "foodItem.text", amount: "3", expirationDay: 5)
-//        let item3 = FoodData(id: 4, food: "foodItem.text", amount: "3", expirationDay: 0)
-
-//        let data: [FoodData] = [item1, item2, item3]
+        //
+        //        let item1 = FoodData(id: 2, food: inputedInfo, amount: "3", expirationDay: dateValue)
+        //        let item2 = FoodData(id: 3, food: "foodItem.text", amount: "3", expirationDay: 5)
+        //        let item3 = FoodData(id: 4, food: "foodItem.text", amount: "3", expirationDay: 0)
+        
+        //        let data: [FoodData] = [item1, item2, item3]
         let foodInfo = FoodData(id: id, amountofDaysTillExpiration: daysDiff, calendarDate: selectedDate, food: inputedInfo, amount: "3", expirationNameValue: expiration)
         
-//        foodData.append(contentsOf: data)
-
+        //        foodData.append(contentsOf: data)
+        
         foodData.append(foodInfo)
-print(foodData)
+        print(foodData)
         
         let dictionary = Dictionary(grouping: foodData, by: { $0.id })
         
-
+        // Create a new FoodData object
+        
+//        let context = PersistenceController.shared.container.viewContext
+//        let newFood = FoodData(from: context)
+//        newFoodData.id = id
+//        newFoodData.food = inputedInfo
+//        newFoodData.amount = "3"
+//        newFoodData.amountofDaysTillExpiration = daysDiff
+//        newFoodData.calendarDate = selectedDate
+//        newFoodData.expirationNameValue = expiration
+        
+        // Save the new object to the managed object context
+//        do {
+//            try moc.save()
+//        } catch {
+//            print("Error saving managed object context: \(error.localizedDescription)")
+//        }
+//
+        // ... rest of the code ...
     }
 }
+
+
 
 
 struct SwiftUIView_Previews: PreviewProvider {

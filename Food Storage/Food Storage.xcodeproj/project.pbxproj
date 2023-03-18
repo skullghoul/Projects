@@ -7,32 +7,26 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3609E47E29C35E45001CA501 /* BookwormApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3609E47D29C35E45001CA501 /* BookwormApp.swift */; };
-		3611013729C35AD0006CCFA4 /* Bookworm.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3611013529C35AD0006CCFA4 /* Bookworm.xcdatamodeld */; };
-		3611013929C35BF2006CCFA4 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3611013829C35BF2006CCFA4 /* DataController.swift */; };
-		3637AFD529B4780000110331 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3637AFD429B4780000110331 /* ContentView.swift */; };
-		3637AFD729B4780100110331 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3637AFD629B4780100110331 /* Assets.xcassets */; };
-		3637AFDA29B4780100110331 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3637AFD929B4780100110331 /* Preview Assets.xcassets */; };
-		3637AFE129B4786400110331 /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3637AFE029B4786400110331 /* FoodData.swift */; };
-		368977D229BB79820057123B /* FoodTrackerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368977D129BB79820057123B /* FoodTrackerApp.swift */; };
-		368977D429BB7A2E0057123B /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 368977D329BB7A2E0057123B /* SwiftUIView.swift */; };
+		36DD74C729C52C980058AB0F /* Food_StorageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DD74C629C52C980058AB0F /* Food_StorageApp.swift */; };
+		36DD74C929C52C980058AB0F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DD74C829C52C980058AB0F /* ContentView.swift */; };
+		36DD74CB29C52C990058AB0F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36DD74CA29C52C990058AB0F /* Assets.xcassets */; };
+		36DD74CE29C52C990058AB0F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36DD74CD29C52C990058AB0F /* Preview Assets.xcassets */; };
+		36DD74D529C52CC30058AB0F /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DD74D429C52CC30058AB0F /* FoodData.swift */; };
+		36DD74D729C52CDC0058AB0F /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36DD74D629C52CDC0058AB0F /* SwiftUIView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		3609E47D29C35E45001CA501 /* BookwormApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BookwormApp.swift; sourceTree = "<group>"; };
-		3611013629C35AD0006CCFA4 /* Bookworm.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Bookworm.xcdatamodel; sourceTree = "<group>"; };
-		3611013829C35BF2006CCFA4 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
-		3637AFCF29B4780000110331 /* FoodTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3637AFD429B4780000110331 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		3637AFD629B4780100110331 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		3637AFD929B4780100110331 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		3637AFE029B4786400110331 /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
-		368977D129BB79820057123B /* FoodTrackerApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodTrackerApp.swift; sourceTree = "<group>"; };
-		368977D329BB7A2E0057123B /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		36DD74C329C52C980058AB0F /* Food Storage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Food Storage.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		36DD74C629C52C980058AB0F /* Food_StorageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Food_StorageApp.swift; sourceTree = "<group>"; };
+		36DD74C829C52C980058AB0F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		36DD74CA29C52C990058AB0F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		36DD74CD29C52C990058AB0F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		36DD74D429C52CC30058AB0F /* FoodData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
+		36DD74D629C52CDC0058AB0F /* SwiftUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		3637AFCC29B4780000110331 /* Frameworks */ = {
+		36DD74C029C52C980058AB0F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -42,42 +36,39 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3637AFC629B4780000110331 = {
+		36DD74BA29C52C980058AB0F = {
 			isa = PBXGroup;
 			children = (
-				3637AFD129B4780000110331 /* FoodTracker */,
-				3637AFD029B4780000110331 /* Products */,
+				36DD74C529C52C980058AB0F /* Food Storage */,
+				36DD74C429C52C980058AB0F /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		3637AFD029B4780000110331 /* Products */ = {
+		36DD74C429C52C980058AB0F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3637AFCF29B4780000110331 /* FoodTracker.app */,
+				36DD74C329C52C980058AB0F /* Food Storage.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		3637AFD129B4780000110331 /* FoodTracker */ = {
+		36DD74C529C52C980058AB0F /* Food Storage */ = {
 			isa = PBXGroup;
 			children = (
-				368977D129BB79820057123B /* FoodTrackerApp.swift */,
-				3637AFD429B4780000110331 /* ContentView.swift */,
-				3611013529C35AD0006CCFA4 /* Bookworm.xcdatamodeld */,
-				368977D329BB7A2E0057123B /* SwiftUIView.swift */,
-				3611013829C35BF2006CCFA4 /* DataController.swift */,
-				3609E47D29C35E45001CA501 /* BookwormApp.swift */,
-				3637AFE029B4786400110331 /* FoodData.swift */,
-				3637AFD629B4780100110331 /* Assets.xcassets */,
-				3637AFD829B4780100110331 /* Preview Content */,
+				36DD74C629C52C980058AB0F /* Food_StorageApp.swift */,
+				36DD74C829C52C980058AB0F /* ContentView.swift */,
+				36DD74D429C52CC30058AB0F /* FoodData.swift */,
+				36DD74D629C52CDC0058AB0F /* SwiftUIView.swift */,
+				36DD74CA29C52C990058AB0F /* Assets.xcassets */,
+				36DD74CC29C52C990058AB0F /* Preview Content */,
 			);
-			path = FoodTracker;
+			path = "Food Storage";
 			sourceTree = "<group>";
 		};
-		3637AFD829B4780100110331 /* Preview Content */ = {
+		36DD74CC29C52C990058AB0F /* Preview Content */ = {
 			isa = PBXGroup;
 			children = (
-				3637AFD929B4780100110331 /* Preview Assets.xcassets */,
+				36DD74CD29C52C990058AB0F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
 			sourceTree = "<group>";
@@ -85,39 +76,39 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		3637AFCE29B4780000110331 /* FoodTracker */ = {
+		36DD74C229C52C980058AB0F /* Food Storage */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3637AFDD29B4780100110331 /* Build configuration list for PBXNativeTarget "FoodTracker" */;
+			buildConfigurationList = 36DD74D129C52C990058AB0F /* Build configuration list for PBXNativeTarget "Food Storage" */;
 			buildPhases = (
-				3637AFCB29B4780000110331 /* Sources */,
-				3637AFCC29B4780000110331 /* Frameworks */,
-				3637AFCD29B4780000110331 /* Resources */,
+				36DD74BF29C52C980058AB0F /* Sources */,
+				36DD74C029C52C980058AB0F /* Frameworks */,
+				36DD74C129C52C980058AB0F /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
 			);
-			name = FoodTracker;
-			productName = FoodTracker;
-			productReference = 3637AFCF29B4780000110331 /* FoodTracker.app */;
+			name = "Food Storage";
+			productName = "Food Storage";
+			productReference = 36DD74C329C52C980058AB0F /* Food Storage.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		3637AFC729B4780000110331 /* Project object */ = {
+		36DD74BB29C52C980058AB0F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1420;
 				LastUpgradeCheck = 1420;
 				TargetAttributes = {
-					3637AFCE29B4780000110331 = {
+					36DD74C229C52C980058AB0F = {
 						CreatedOnToolsVersion = 14.2;
 					};
 				};
 			};
-			buildConfigurationList = 3637AFCA29B4780000110331 /* Build configuration list for PBXProject "FoodTracker" */;
+			buildConfigurationList = 36DD74BE29C52C980058AB0F /* Build configuration list for PBXProject "Food Storage" */;
 			compatibilityVersion = "Xcode 14.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -125,47 +116,44 @@
 				en,
 				Base,
 			);
-			mainGroup = 3637AFC629B4780000110331;
-			productRefGroup = 3637AFD029B4780000110331 /* Products */;
+			mainGroup = 36DD74BA29C52C980058AB0F;
+			productRefGroup = 36DD74C429C52C980058AB0F /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				3637AFCE29B4780000110331 /* FoodTracker */,
+				36DD74C229C52C980058AB0F /* Food Storage */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		3637AFCD29B4780000110331 /* Resources */ = {
+		36DD74C129C52C980058AB0F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3637AFDA29B4780100110331 /* Preview Assets.xcassets in Resources */,
-				3637AFD729B4780100110331 /* Assets.xcassets in Resources */,
+				36DD74CE29C52C990058AB0F /* Preview Assets.xcassets in Resources */,
+				36DD74CB29C52C990058AB0F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		3637AFCB29B4780000110331 /* Sources */ = {
+		36DD74BF29C52C980058AB0F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				368977D229BB79820057123B /* FoodTrackerApp.swift in Sources */,
-				3611013929C35BF2006CCFA4 /* DataController.swift in Sources */,
-				3637AFE129B4786400110331 /* FoodData.swift in Sources */,
-				3637AFD529B4780000110331 /* ContentView.swift in Sources */,
-				3609E47E29C35E45001CA501 /* BookwormApp.swift in Sources */,
-				368977D429BB7A2E0057123B /* SwiftUIView.swift in Sources */,
-				3611013729C35AD0006CCFA4 /* Bookworm.xcdatamodeld in Sources */,
+				36DD74D529C52CC30058AB0F /* FoodData.swift in Sources */,
+				36DD74C929C52C980058AB0F /* ContentView.swift in Sources */,
+				36DD74D729C52CDC0058AB0F /* SwiftUIView.swift in Sources */,
+				36DD74C729C52C980058AB0F /* Food_StorageApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		3637AFDB29B4780100110331 /* Debug */ = {
+		36DD74CF29C52C990058AB0F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -225,7 +213,7 @@
 			};
 			name = Debug;
 		};
-		3637AFDC29B4780100110331 /* Release */ = {
+		36DD74D029C52C990058AB0F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -279,18 +267,16 @@
 			};
 			name = Release;
 		};
-		3637AFDE29B4780100110331 /* Debug */ = {
+		36DD74D229C52C990058AB0F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"FoodTracker/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Food Storage/Preview Content\"";
 				DEVELOPMENT_TEAM = PWTL37LPKK;
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_ARCHS = arm64;
-				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -302,7 +288,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = swift.FoodTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = "swift.Food-Storage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -310,17 +296,16 @@
 			};
 			name = Debug;
 		};
-		3637AFDF29B4780100110331 /* Release */ = {
+		36DD74D329C52C990058AB0F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"FoodTracker/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"Food Storage/Preview Content\"";
 				DEVELOPMENT_TEAM = PWTL37LPKK;
 				ENABLE_PREVIEWS = YES;
-				EXCLUDED_ARCHS = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -332,7 +317,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = swift.FoodTracker;
+				PRODUCT_BUNDLE_IDENTIFIER = "swift.Food-Storage";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -343,38 +328,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		3637AFCA29B4780000110331 /* Build configuration list for PBXProject "FoodTracker" */ = {
+		36DD74BE29C52C980058AB0F /* Build configuration list for PBXProject "Food Storage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3637AFDB29B4780100110331 /* Debug */,
-				3637AFDC29B4780100110331 /* Release */,
+				36DD74CF29C52C990058AB0F /* Debug */,
+				36DD74D029C52C990058AB0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3637AFDD29B4780100110331 /* Build configuration list for PBXNativeTarget "FoodTracker" */ = {
+		36DD74D129C52C990058AB0F /* Build configuration list for PBXNativeTarget "Food Storage" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				3637AFDE29B4780100110331 /* Debug */,
-				3637AFDF29B4780100110331 /* Release */,
+				36DD74D229C52C990058AB0F /* Debug */,
+				36DD74D329C52C990058AB0F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		3611013529C35AD0006CCFA4 /* Bookworm.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				3611013629C35AD0006CCFA4 /* Bookworm.xcdatamodel */,
-			);
-			currentVersion = 3611013629C35AD0006CCFA4 /* Bookworm.xcdatamodel */;
-			path = Bookworm.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
-	rootObject = 3637AFC729B4780000110331 /* Project object */;
+	rootObject = 36DD74BB29C52C980058AB0F /* Project object */;
 }
