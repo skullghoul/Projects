@@ -33,12 +33,16 @@ struct SwiftUIView: View {
                 
             }
             HStack{
-                Picker("Item Amount", selection: $amountValue) {
-                    ForEach(0 ..< 600) {
-                        Text(String(format: "%02d", $0))
+                Spacer()
+                Section("Item Quantity") {
+                    Picker("Item Amount", selection: $amountValue) {
+                        ForEach(0 ..< 600) {
+                            Text(String(format: "%02d", $0))
+                        }
                     }
-                    
                 }
+                Spacer()
+                Spacer()
             }
             DatePicker("Expiration Date", selection: $selectedDate, in: Date.now..., displayedComponents: .date)
                 .pickerStyle(.inline)
