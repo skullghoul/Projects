@@ -16,7 +16,7 @@ class RandomAPI {
     class RandomAPIController {
         
         func fetchRandomUser(userAmount: Int, _ searchParameters: [String]) async throws -> Response {
-            let url = URL(string:         "https://randomuser.me/api/?inc=name,picture,\(searchParameters.joined(separator: ","))&results=\(userAmount)")
+            let url = URL(string: "https://randomuser.me/api/?inc=name,picture,\(searchParameters.joined(separator: ","))&results=\(userAmount)")
             
 
             let (data, response) = try await URLSession.shared.data(from: url!)

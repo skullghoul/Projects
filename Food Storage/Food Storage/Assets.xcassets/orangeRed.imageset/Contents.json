@@ -11,7 +11,7 @@
           "value" : "light"
         }
       ],
-      "filename" : "orangeRed.png",
+      "filename" : "limeG2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -22,11 +22,12 @@
           "value" : "dark"
         }
       ],
-      "filename" : "Dark Gradient.jpeg",
+      "filename" : "Darkwithlightattop.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "orangeRed.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
@@ -51,6 +52,7 @@
       "scale" : "2x"
     },
     {
+      "filename" : "limGreenGradient.png",
       "idiom" : "universal",
       "scale" : "3x"
     },
