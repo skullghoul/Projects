@@ -15,7 +15,7 @@ struct SwiftUIView: View {
     
     @Environment(\.managedObjectContext) var context: NSManagedObjectContext
     
-//    @Binding var foodData: [FoodData]
+    @Binding var checkEditIsPushed: Bool
     @Binding var presentSheet: Bool
     @Binding var selectedFood: Item?
     @State private var selectedDate = Date()
@@ -158,18 +158,43 @@ struct SwiftUIView: View {
 //            amount: String(amountValue),
 //            expirationNameValue: expiration
 //        )
-
-        let item = Item(context: context)
-        item.amountofDaysTillExpiration = Int16(daysDiff)
-        item.calendarDate = selectedDate
-        item.food = inputedInfo
-        item.amount = String(amountValue)
-        item.expirationNameValue = Int16(expiration)
-        item.uuid = uuid
-        try? moc.save()
-        
-
-        
+        if checkEditIsPushed == false {
+            let item = Item(context: context)
+            item.amountofDaysTillExpiration = Int16(daysDiff)
+            item.calendarDate = selectedDate
+            item.food = inputedInfo
+            item.amount = String(amountValue)
+            item.expirationNameValue = Int16(expiration)
+            item.uuid = uuid
+            try? moc.save()
+        } else if checkEditIsPushed == true {
+            
+            var convertUUIDString = uuid.uuidString
+            guard let uuid = UUID(uuidString: convertUUIDString) else {
+                return
+            }
+            
+            let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+            fetchRequest.predicate = NSPredicate(format: "uuid == %@", uuid as CVarArg)
+            
+            do {
+                let result = try moc.fetch(fetchRequest)
+                guard let objectToUpdate = result.first else {
+                    return
+                }
+                objectToUpdate.amountofDaysTillExpiration = Int16(daysDiff)
+                objectToUpdate.calendarDate = selectedDate
+                objectToUpdate.food = inputedInfo
+                objectToUpdate.amount = String(amountValue)
+                objectToUpdate.expirationNameValue = Int16(expiration)
+                try? moc.save()
+            } catch {
+                print("Error fetching object: \(error.localizedDescription)")
+            }
+            
+        } else {
+            print("failed to find checkEditIsPushed")
+        }
         
     // MARK: you need to make this work for CoreData
         
@@ -196,6 +221,6 @@ struct SwiftUIView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        SwiftUIView(presentSheet: .constant(true), selectedFood: .constant(Item()))
+        SwiftUIView(checkEditIsPushed: .constant(false), presentSheet: .constant(true), selectedFood: .constant(Item()))
     }
 }

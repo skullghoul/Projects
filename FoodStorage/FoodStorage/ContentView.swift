@@ -9,9 +9,10 @@ import CoreData
 import SwiftUI
 
 struct ContentView: View {
-
+    
     @FetchRequest(sortDescriptors: []) var foodData: FetchedResults<Item>
         
+    @State private var checkEditIsPushed = false
     @State private var selectedFood: Item? = nil
     @State private var presentSheet = false
 
@@ -41,6 +42,7 @@ struct ContentView: View {
                                     Button(action: {
                                         selectedFood = food
                                         presentSheet = true
+                                        checkEditIsPushed = true
                                     }) {
                                         HStack {
                                             Text("\(food.amountofDaysTillExpiration) Days")
@@ -56,7 +58,7 @@ struct ContentView: View {
                                         }
                                     }
                                     .buttonStyle(PlainButtonStyle())
- 
+                                    
                                     
                                 }
                             }
@@ -74,12 +76,8 @@ struct ContentView: View {
                 })
                                     
                     .sheet(isPresented: $presentSheet, content: {
-                        SwiftUIView(presentSheet: $presentSheet, selectedFood: $selectedFood)
+                        SwiftUIView(checkEditIsPushed: $checkEditIsPushed, presentSheet: $presentSheet, selectedFood: $selectedFood)
                     })
-
-                    
-                
-            }
             
             .background {
                 Image("orangeRed")
@@ -89,6 +87,10 @@ struct ContentView: View {
             .navigationTitle("Hello")
         }
     }
+    
+        }
+        
+        
 }
 
     struct ContentView_Previews: PreviewProvider {
