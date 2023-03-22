@@ -9,13 +9,14 @@ import Foundation
 
 
 struct FoodData: Codable, Identifiable, Equatable {
-//    var idData = UUID()
+    var uuid = UUID()
     var id: Int
     var amountofDaysTillExpiration: Int
     var calendarDate: Date
     var food: String
     var amount: String
     var expirationNameValue: Int
+    
     init(idData: UUID = UUID(), id: Int = 0, amountofDaysTillExpiration: Int = 0, calendarDate: Date = Date.now, food: String = "", amount: String = "", expirationNameValue: Int = 0) {
 //        self.idData = idData
         self.id = id
@@ -30,4 +31,4 @@ struct FoodData: Codable, Identifiable, Equatable {
         return lhs.id == rhs.id
     }
 }
-
+ 

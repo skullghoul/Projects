@@ -5,20 +5,19 @@
 //  Created by Zander Ewell on 3/5/23.
 //
 
+import CoreData
 import SwiftUI
 
 struct ContentView: View {
 
-
+    @FetchRequest(sortDescriptors: []) var foodData: FetchedResults<Item>
         
-    @State private var selectedFood: FoodData? = nil
+    @State private var selectedFood: Item? = nil
     @State private var presentSheet = false
-    @State private var foodData: [FoodData] = [
-        FoodData(id: 0, amountofDaysTillExpiration: 0, calendarDate: Date.now, food: "Corn", amount: "2", expirationNameValue: 2)
-    ]
+
     @State private var showingEditAlert: Bool = false
     
-    var groupedFoodData: [String: [FoodData]] {
+    var groupedFoodData: [String: [Item]] {
         Dictionary(grouping: foodData) { food in
             switch food.expirationNameValue {
             case 0:
@@ -38,7 +37,7 @@ struct ContentView: View {
                     ForEach(["Expired", "Going bad soon", "Fresh"], id: \.self) { key in
                         Section(header: Text(key)) {
                             if let foods = groupedFoodData[key] {
-                                ForEach(foods, id: \.id) { food in
+                                ForEach(foods, id: \.uuid) { food in
                                     Button(action: {
                                         selectedFood = food
                                         presentSheet = true
@@ -48,8 +47,8 @@ struct ContentView: View {
                                                 .bold()
                                             Spacer()
                                             VStack(alignment: .leading) {
-                                                Text(food.food)
-                                                Text("\(food.amount) left in stock")
+                                                Text(food.food ?? "")
+                                                Text("\(food.amount ?? "0") left in stock")
                                                     .font(.caption)
                                                     .foregroundColor(.gray)
                                             }
@@ -57,18 +56,7 @@ struct ContentView: View {
                                         }
                                     }
                                     .buttonStyle(PlainButtonStyle())
-                                    //                                    .alert(isPresented: $showingEditAlert, content: {
-                                    //                                        Alert(
-                                    //                                            title: Text("Edit \(food.food)"),
-                                    //                                            message: nil,
-                                    //                                            primaryButton: .default(Text("Edit")) {
-                                    //                                                presentSheet = true
-                                    //                                            },
-                                    //                                            secondaryButton: Alert.Button.cancel({
-                                    //                                                selectedFood = nil
-                                    //                                            })
-                                    //                                        )
-                                    //                                    })
+ 
                                     
                                 }
                             }
@@ -86,7 +74,7 @@ struct ContentView: View {
                 })
                                     
                     .sheet(isPresented: $presentSheet, content: {
-                        SwiftUIView(foodData: $foodData, presentSheet: $presentSheet, selectedFood: $selectedFood)
+                        SwiftUIView(presentSheet: $presentSheet, selectedFood: $selectedFood)
                     })
 
                     

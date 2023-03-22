@@ -5,14 +5,19 @@
 //  Created by Zander Ewell on 3/10/23.
 //
 
+import CoreData
 import SwiftUI
 
 
 struct SwiftUIView: View {
     
-    @Binding var foodData: [FoodData]
+    @Environment(\.managedObjectContext) var moc
+    
+    @Environment(\.managedObjectContext) var context: NSManagedObjectContext
+    
+//    @Binding var foodData: [FoodData]
     @Binding var presentSheet: Bool
-    @Binding var selectedFood: FoodData?
+    @Binding var selectedFood: Item?
     @State private var selectedDate = Date()
     @State private var inputedInfo = ""
     @State private var amountValue = 1
@@ -104,9 +109,9 @@ struct SwiftUIView: View {
 
         .onAppear {
             if let food = selectedFood {
-                inputedInfo = food.food
-                amountValue = Int(food.amount) ?? 1
-                selectedDate = food.calendarDate
+                inputedInfo = food.food ?? ""
+                amountValue = Int(food.amount ?? "") ?? 1
+                selectedDate = food.calendarDate ?? Date.now
             }
         }
     }
@@ -125,7 +130,9 @@ struct SwiftUIView: View {
         let timeDiff = future?.timeIntervalSinceNow
         let daysDiff = Int(timeDiff! / (24 * 60 * 60) + 1)
 
-        let id = selectedFood?.id  ?? foodData.count
+        var createNewUuid = UUID()
+        
+        let uuid = selectedFood?.uuid ?? createNewUuid
 
 
         var dateValue = 0
@@ -142,28 +149,46 @@ struct SwiftUIView: View {
             print("failed to find dateValue unexpected number \(dateValue)")
         }
 
-        let foodInfo = FoodData(
-            id: id,
-            amountofDaysTillExpiration: daysDiff,
-            calendarDate: selectedDate,
-            food: inputedInfo,
-            amount: String(amountValue),
-            expirationNameValue: expiration
-        )
+        
+//        let foodInfo = FoodData(
+//            id: Int(id),
+//            amountofDaysTillExpiration: daysDiff,
+//            calendarDate: selectedDate,
+//            food: inputedInfo,
+//            amount: String(amountValue),
+//            expirationNameValue: expiration
+//        )
 
-        if let index = foodData.firstIndex(where: { $0.id == id }) {
-//            foodData[index] = foodInfo
-            foodData.remove(at: index)
-            foodData.append(foodInfo)
+        let item = Item(context: context)
+        item.amountofDaysTillExpiration = Int16(daysDiff)
+        item.calendarDate = selectedDate
+        item.food = inputedInfo
+        item.amount = String(amountValue)
+        item.expirationNameValue = Int16(expiration)
+        item.uuid = uuid
+        try? moc.save()
+        
 
-        } else {
-            foodData.append(foodInfo)
-        }
+        
+        
+    // MARK: you need to make this work for CoreData
+        
+
+//        if let index = foodData.firstIndex(where: { $0.id == id }) {
+////            foodData[index] = foodInfo
+//            foodData.remove(at: index)
+//            foodData.append(foodInfo)
+//
+//        } else {
+//            foodData.append(foodInfo)
+//        }
 
         presentSheet = false
         selectedFood = nil
 
     }
+    
+
 
 }
 
@@ -171,6 +196,6 @@ struct SwiftUIView: View {
 
 struct SwiftUIView_Previews: PreviewProvider {
     static var previews: some View {
-        SwiftUIView(foodData: .constant([]), presentSheet: .constant(true), selectedFood: .constant(FoodData()))
+        SwiftUIView(presentSheet: .constant(true), selectedFood: .constant(Item()))
     }
 }
