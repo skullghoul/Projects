@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		363D667F29CAB974004DAF55 /* FoodData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D667E29CAB974004DAF55 /* FoodData.swift */; };
 		363D668129CAB978004DAF55 /* SwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 363D668029CAB978004DAF55 /* SwiftUIView.swift */; };
+		36457EFE29CCBBE00003CDC5 /* ListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36457EFD29CCBBE00003CDC5 /* ListView.swift */; };
+		36457F0029CCC40B0003CDC5 /* StoreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36457EFF29CCC40B0003CDC5 /* StoreListView.swift */; };
 		36D8F57229CAB8D400AB703B /* FoodStorageApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D8F57129CAB8D400AB703B /* FoodStorageApp.swift */; };
 		36D8F57429CAB8D400AB703B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36D8F57329CAB8D400AB703B /* ContentView.swift */; };
 		36D8F57629CAB8D500AB703B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 36D8F57529CAB8D500AB703B /* Assets.xcassets */; };
@@ -18,8 +19,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		363D667E29CAB974004DAF55 /* FoodData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FoodData.swift; sourceTree = "<group>"; };
 		363D668029CAB978004DAF55 /* SwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftUIView.swift; sourceTree = "<group>"; };
+		36457EFD29CCBBE00003CDC5 /* ListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListView.swift; sourceTree = "<group>"; };
+		36457EFF29CCC40B0003CDC5 /* StoreListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreListView.swift; sourceTree = "<group>"; };
 		36D8F56E29CAB8D400AB703B /* FoodStorage.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FoodStorage.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		36D8F57129CAB8D400AB703B /* FoodStorageApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoodStorageApp.swift; sourceTree = "<group>"; };
 		36D8F57329CAB8D400AB703B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -60,9 +62,10 @@
 			isa = PBXGroup;
 			children = (
 				36D8F57129CAB8D400AB703B /* FoodStorageApp.swift */,
-				363D667E29CAB974004DAF55 /* FoodData.swift */,
 				36D8F57329CAB8D400AB703B /* ContentView.swift */,
 				363D668029CAB978004DAF55 /* SwiftUIView.swift */,
+				36457EFD29CCBBE00003CDC5 /* ListView.swift */,
+				36457EFF29CCC40B0003CDC5 /* StoreListView.swift */,
 				36D8F57C29CAB8D500AB703B /* FoodStorage.xcdatamodeld */,
 				36D8F57A29CAB8D500AB703B /* Persistence.swift */,
 				36D8F57529CAB8D500AB703B /* Assets.xcassets */,
@@ -151,9 +154,10 @@
 			files = (
 				36D8F57B29CAB8D500AB703B /* Persistence.swift in Sources */,
 				36D8F57E29CAB8D500AB703B /* FoodStorage.xcdatamodeld in Sources */,
+				36457F0029CCC40B0003CDC5 /* StoreListView.swift in Sources */,
+				36457EFE29CCBBE00003CDC5 /* ListView.swift in Sources */,
 				363D668129CAB978004DAF55 /* SwiftUIView.swift in Sources */,
 				36D8F57429CAB8D400AB703B /* ContentView.swift in Sources */,
-				363D667F29CAB974004DAF55 /* FoodData.swift in Sources */,
 				36D8F57229CAB8D400AB703B /* FoodStorageApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

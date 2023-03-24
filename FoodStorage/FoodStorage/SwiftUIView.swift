@@ -111,26 +111,38 @@ struct SwiftUIView: View {
             if let food = selectedFood {
                 inputedInfo = food.food ?? ""
                 amountValue = Int(food.amount ?? "") ?? 1
-                selectedDate = food.calendarDate ?? Date.now
+                
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "MM/dd/yy"
+                selectedDate = dateFormatter.date(from: food.calendarDate ?? "") ?? Date()
             }
         }
     }
     
     func dateAmount() {
+        
+        
+        
         // Default value for the expiration
         var expiration = 0
 
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
-        print(dateFormatter.string(from: date))
+        var selectedDaySaved = dateFormatter.string(from: selectedDate)
 
-        let changedString = dateFormatter.string(from: selectedDate)
-        let future = dateFormatter.date(from: changedString)
-        let timeDiff = future?.timeIntervalSinceNow
-        let daysDiff = Int(timeDiff! / (24 * 60 * 60) + 1)
+        let calendar = Calendar.current
+        let startOfDaySelectedDate = calendar.startOfDay(for: selectedDate)
+        let startOfDayToday = calendar.startOfDay(for: date)
+        let components = calendar.dateComponents([.day], from: startOfDayToday, to: startOfDaySelectedDate)
+        let daysDiff = components.day ?? 0
+        
+//        let changedString = dateFormatter.string(from: selectedDate)
+//        let future = dateFormatter.date(from: changedString)
+//        let timeDiff = future?.timeIntervalSinceNow
+//        let daysDiff = Int(timeDiff! / (24 * 60 * 60) + 1)
 
-        var createNewUuid = UUID()
+        let createNewUuid = UUID()
         
         let uuid = selectedFood?.uuid ?? createNewUuid
 
@@ -149,19 +161,10 @@ struct SwiftUIView: View {
             print("failed to find dateValue unexpected number \(dateValue)")
         }
 
-        
-//        let foodInfo = FoodData(
-//            id: Int(id),
-//            amountofDaysTillExpiration: daysDiff,
-//            calendarDate: selectedDate,
-//            food: inputedInfo,
-//            amount: String(amountValue),
-//            expirationNameValue: expiration
-//        )
         if checkEditIsPushed == false {
             let item = Item(context: context)
             item.amountofDaysTillExpiration = Int16(daysDiff)
-            item.calendarDate = selectedDate
+            item.calendarDate = selectedDaySaved
             item.food = inputedInfo
             item.amount = String(amountValue)
             item.expirationNameValue = Int16(expiration)
@@ -169,7 +172,7 @@ struct SwiftUIView: View {
             try? moc.save()
         } else if checkEditIsPushed == true {
             
-            var convertUUIDString = uuid.uuidString
+            let convertUUIDString = uuid.uuidString
             guard let uuid = UUID(uuidString: convertUUIDString) else {
                 return
             }
@@ -183,7 +186,7 @@ struct SwiftUIView: View {
                     return
                 }
                 objectToUpdate.amountofDaysTillExpiration = Int16(daysDiff)
-                objectToUpdate.calendarDate = selectedDate
+                objectToUpdate.calendarDate = selectedDaySaved
                 objectToUpdate.food = inputedInfo
                 objectToUpdate.amount = String(amountValue)
                 objectToUpdate.expirationNameValue = Int16(expiration)
@@ -196,25 +199,13 @@ struct SwiftUIView: View {
             print("failed to find checkEditIsPushed")
         }
         
-    // MARK: you need to make this work for CoreData
-        
-
-//        if let index = foodData.firstIndex(where: { $0.id == id }) {
-////            foodData[index] = foodInfo
-//            foodData.remove(at: index)
-//            foodData.append(foodInfo)
-//
-//        } else {
-//            foodData.append(foodInfo)
-//        }
 
         presentSheet = false
         selectedFood = nil
-
+        checkEditIsPushed = false
+        
     }
     
-
-
 }
 
 

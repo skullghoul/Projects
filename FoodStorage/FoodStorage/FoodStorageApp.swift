@@ -5,6 +5,7 @@
 //  Created by Zander Ewell on 3/21/23.
 //
 
+
 import SwiftUI
 
 @main
@@ -13,8 +14,10 @@ struct FoodStorageApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ListView()
+
                 .environment(\.managedObjectContext, persistenceController.viewContext)
+
         }
     }
 }
