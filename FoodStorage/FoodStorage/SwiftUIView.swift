@@ -34,7 +34,7 @@ struct SwiftUIView: View {
                 Button("Cancel") {
                     presentSheet = false
                     selectedFood = nil
-                }
+                    checkEditIsPushed = false                }
                 Spacer()
                 .interactiveDismissDisabled()
 

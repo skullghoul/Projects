@@ -17,6 +17,7 @@ struct ContentView: View {
     @State private var checkEditIsPushed = false
     @State private var selectedFood: Item? = nil
     @State private var presentSheet = false
+    @State private var headingTitles = ["Expired", "Going bad soon", "Fresh"]
     
     @State private var showingEditAlert: Bool = false
     
@@ -37,15 +38,20 @@ struct ContentView: View {
         NavigationView {
             ZStack {
                 List {
-                    ForEach(["Expired", "Going bad soon", "Fresh"], id: \.self) { key in
+                    ForEach(headingTitles, id: \.self) { key in
+                        
                         Section(header: Text(key)) {
+                            
                             if let foods = groupedFoodData[key] {
+                                
                                 ForEach(foods, id: \.uuid) { food in
+                                    
                                     Button(action: {
                                         selectedFood = food
                                         presentSheet = true
                                         checkEditIsPushed = true
                                     }) {
+                                        
                                         HStack {
                                             Text("\(food.amountofDaysTillExpiration) Days")
                                                 .bold()
@@ -56,6 +62,26 @@ struct ContentView: View {
                                                     .font(.caption)
                                                     .foregroundColor(.gray)
                                             }
+                                            
+                                            .swipeActions(edge: .leading) {
+                                                Button("Add to list") {
+                                                    print("added")
+                                                }
+                                                
+                                            }
+                                            
+//                                            .swipeActions(edge: .trailing) {
+//                                                Button(role: .destructive) {
+//                                                    delete = true
+//                                                } label: {
+//                                                    Label("Delete", systemImage: "trash")
+//                                                          }
+//                                                }
+                                            
+                                                
+                                           
+                                            
+                                            .tint(.black)
                                             Spacer()
                                             let dateFormatter = DateFormatter()
                                             Text(food.calendarDate ?? "")
@@ -71,9 +97,12 @@ struct ContentView: View {
                                     
                                     
                                 }
+                                .onDelete(perform: delete)
                             }
+
                         }
                     }
+                    
                 }
                 
                 .colorMultiply(.init("Color"))
@@ -95,7 +124,7 @@ struct ContentView: View {
                     Color.black.opacity(0.08)
                         .frame(width: 500, height: 1100)
                 }
-
+                
                 
                 
                 
@@ -103,43 +132,55 @@ struct ContentView: View {
         }
     }
     
-//    func updateData() {
-//        let today = Date()
-//        let request = NSFetchRequest<Item>(entityName: "Item")
-//        request.predicate = NSPredicate(format: "expirationDate <= %@", today as NSDate)
+    //    func updateData() {
+    //        let today = Date()
+    //        let request = NSFetchRequest<Item>(entityName: "Item")
+    //        request.predicate = NSPredicate(format: "expirationDate <= %@", today as NSDate)
+    //        do {
+    //            let expiredItems = try moc.fetch(request)
+    //            for item in expiredItems {
+    //                switch item.expirationNameValue {
+    //                case 0:
+    //                    item.expirationNameValue = 2
+    //                case 1:
+    //                    item.expirationNameValue = 0
+    //                default:
+    //                    break
+    //                }
+    //                let calendar = Calendar.current
+    //                let newDate = calendar.date(byAdding: .day, value: Int(item.amountofDaysTillExpiration), to: today)
+    //                item.calendarDate = newDate
+    //            }
+    //            try moc.save()
+    //        } catch {
+    //            print("Error updating data: \(error)")
+    //        }
+    //    }
+    
+    func delete(at offsets: IndexSet) {
+//        for index in offsets {
+//            let itemsIndex = foodData[index]
+//            moc.delete(itemsIndex)
+//        }
 //        do {
-//            let expiredItems = try moc.fetch(request)
-//            for item in expiredItems {
-//                switch item.expirationNameValue {
-//                case 0:
-//                    item.expirationNameValue = 2
-//                case 1:
-//                    item.expirationNameValue = 0
-//                default:
-//                    break
-//                }
-//                let calendar = Calendar.current
-//                let newDate = calendar.date(byAdding: .day, value: Int(item.amountofDaysTillExpiration), to: today)
-//                item.calendarDate = newDate
-//            }
 //            try moc.save()
 //        } catch {
 //            print("Error updating data: \(error)")
 //        }
-//    }
-    
-    
-    
-    
-    }
-
-
-    struct ContentView_Previews: PreviewProvider {
-        static var previews: some View {
-            ContentView()
-        }
+        headingTitles.remove(atOffsets: offsets)
+        
     }
     
     
-    
- 
+}
+
+
+struct ContentView_Previews: PreviewProvider {
+    static var previews: some View {
+        ContentView()
+    }
+}
+
+
+
+
