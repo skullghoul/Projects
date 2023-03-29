@@ -10,6 +10,8 @@ import SwiftUI
 
 struct ContentView: View {
     
+    @Environment(\.scenePhase) var scenePhase
+    
     @Environment(\.managedObjectContext) var moc
     
     @FetchRequest(sortDescriptors: []) var foodData: FetchedResults<Item>
@@ -19,7 +21,14 @@ struct ContentView: View {
     @State private var presentSheet = false
     @State private var headingTitles = ["Expired", "Going bad soon", "Fresh"]
     
+    @State private var grabGroupedKeyData: [Item] = []
+    
     @State private var showingEditAlert: Bool = false
+    
+    @State private var alertForListAmount = false
+    
+    @State private var alertAmountInput = ""
+
     
     var groupedFoodData: [String: [Item]] {
         Dictionary(grouping: foodData) { food in
@@ -45,7 +54,6 @@ struct ContentView: View {
                             if let foods = groupedFoodData[key] {
                                 
                                 ForEach(foods, id: \.uuid) { food in
-                                    
                                     Button(action: {
                                         selectedFood = food
                                         presentSheet = true
@@ -65,22 +73,25 @@ struct ContentView: View {
                                             
                                             .swipeActions(edge: .leading) {
                                                 Button("Add to list") {
-                                                    print("added")
+                                                    alertForListAmount = true
+                                                    
+                                                    
                                                 }
-                                                
                                             }
-                                            
-//                                            .swipeActions(edge: .trailing) {
-//                                                Button(role: .destructive) {
-//                                                    delete = true
-//                                                } label: {
-//                                                    Label("Delete", systemImage: "trash")
-//                                                          }
-//                                                }
-                                            
-                                                
-                                           
-                                            
+                                                .alert("Input amount", isPresented: $alertForListAmount) {
+                                                    TextField("Zander", text: $alertAmountInput)
+                                                    Button("OK", role: .cancel) {
+                                                        let listing = ListGroceries(context: moc)
+                                                        listing.uuid  = UUID()
+                                                        listing.name = food.food
+                                                        listing.amount = alertAmountInput
+                                                        
+                                                        try? moc.save()
+                                                        
+                                                        alertAmountInput = ""
+                                                    }
+                                                }
+                                                                                    
                                             .tint(.black)
                                             Spacer()
                                             let dateFormatter = DateFormatter()
@@ -94,17 +105,39 @@ struct ContentView: View {
                                         .padding(.vertical, 3)
                                     }
                                     .buttonStyle(PlainButtonStyle())
-                                    
+                                    .onChange(of: scenePhase) { newPhase in
+                                        switch newPhase {
+                                            case .inactive:
+                                            print("inactive")
+                                            updatingData()
+                                        case .active:
+                                            print("active")
+                                            updatingData()
+                                        case .background:
+                                            print("background")
+                                        }
+                                    }
+                                    .onAppear{
+                                        print("Food Name: \(food.food), id: \(food.uuid), Key \(key)")
+                                    }
                                     
                                 }
-                                .onDelete(perform: delete)
+                                
+                                .onDelete{ indexSet in
+                                    delete(at: indexSet, key: key)
+                                }
                             }
-
+                                
                         }
+                        
                     }
                     
                 }
-                
+//                .onAppear {
+//                    updatingData()
+//                    print("Made it to on appear")
+//                }
+//
                 .colorMultiply(.init("Color"))
                 .scrollContentBackground(.hidden)
                 .navigationBarTitle("Food Tracker")
@@ -132,42 +165,61 @@ struct ContentView: View {
         }
     }
     
-    //    func updateData() {
-    //        let today = Date()
-    //        let request = NSFetchRequest<Item>(entityName: "Item")
-    //        request.predicate = NSPredicate(format: "expirationDate <= %@", today as NSDate)
-    //        do {
-    //            let expiredItems = try moc.fetch(request)
-    //            for item in expiredItems {
-    //                switch item.expirationNameValue {
-    //                case 0:
-    //                    item.expirationNameValue = 2
-    //                case 1:
-    //                    item.expirationNameValue = 0
-    //                default:
-    //                    break
-    //                }
-    //                let calendar = Calendar.current
-    //                let newDate = calendar.date(byAdding: .day, value: Int(item.amountofDaysTillExpiration), to: today)
-    //                item.calendarDate = newDate
-    //            }
-    //            try moc.save()
-    //        } catch {
-    //            print("Error updating data: \(error)")
-    //        }
-    //    }
+    func updatingData() {
+        let today = Date()
+        let request = NSFetchRequest<Item>(entityName: "Item")
+        request.predicate = NSPredicate(format: "calendarDate <= %@", today as NSDate)
+        do {
+            let expiredItems = try moc.fetch(request)
+            for item in expiredItems {
+                let calendar = Calendar.current
+                let newDate = calendar.date(byAdding: .day, value: Int(item.amountofDaysTillExpiration), to: today)
+                let daysUntilExpiration = calendar.dateComponents([.day], from: today, to: newDate!).day ?? 0
+                switch daysUntilExpiration {
+                case ...0:
+                    item.expirationNameValue = 2 // "Expired"
+                case 1...3:
+                    item.expirationNameValue = 1 // "Going bad soon"
+                default:
+                    item.expirationNameValue = 0 // "Fresh"
+                }
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateStyle = .short
+                dateFormatter.timeStyle = .none
+                item.calendarDate = dateFormatter.string(from: newDate!)
+                let daysFromToday = calendar.dateComponents([.day], from: today, to: newDate!).day ?? 0
+                item.amountofDaysTillExpiration = Int16(daysFromToday)
+            }
+            try moc.save()
+        } catch {
+            print("Error updating data: \(error)")
+        }
+    }
     
-    func delete(at offsets: IndexSet) {
-//        for index in offsets {
-//            let itemsIndex = foodData[index]
-//            moc.delete(itemsIndex)
+
+    
+    func delete(at offsets: IndexSet, key: String) {
+//        let foodItem: Item
+//        switch key {
+//        case "Expired":
+//
+//        case "Going bad soon":
+//        case "Fresh":
+//        default: return
 //        }
-//        do {
-//            try moc.save()
-//        } catch {
-//            print("Error updating data: \(error)")
-//        }
-        headingTitles.remove(atOffsets: offsets)
+        
+        
+        
+        for index in offsets {
+            guard let item = groupedFoodData[key]?[index] else { return }
+            moc.delete(item)
+        }
+        do {
+            try moc.save()
+        } catch {
+            print("Error updating data: \(error)")
+        }
+
         
     }
     

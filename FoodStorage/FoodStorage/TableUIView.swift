@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct ListView: View {
+struct TableUIView: View {
     var body: some View {
-        TabView{
+        TabView {
             ContentView()
             .tabItem {
                 Label("Menu", systemImage: "list.dash")
@@ -26,6 +26,6 @@ struct ListView: View {
 
 struct ListView_Previews: PreviewProvider {
     static var previews: some View {
-        ListView()
+        TableUIView()
     }
 }

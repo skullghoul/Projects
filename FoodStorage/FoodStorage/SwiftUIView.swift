@@ -129,7 +129,7 @@ struct SwiftUIView: View {
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
-        var selectedDaySaved = dateFormatter.string(from: selectedDate)
+        let selectedDaySaved = dateFormatter.string(from: selectedDate)
 
         let calendar = Calendar.current
         let startOfDaySelectedDate = calendar.startOfDay(for: selectedDate)

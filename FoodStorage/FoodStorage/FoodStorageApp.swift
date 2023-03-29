@@ -14,7 +14,7 @@ struct FoodStorageApp: App {
 
     var body: some Scene {
         WindowGroup {
-            ListView()
+            TableUIView()
 
                 .environment(\.managedObjectContext, persistenceController.viewContext)
 
