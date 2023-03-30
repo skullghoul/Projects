@@ -109,7 +109,7 @@ struct SwiftUIView: View {
 
         .onAppear {
             if let food = selectedFood {
-                inputedInfo = food.food ?? ""
+                inputedInfo = food.nameOfFood ?? ""
                 amountValue = Int(food.amount ?? "") ?? 1
                 
                 let dateFormatter = DateFormatter()
@@ -165,7 +165,7 @@ struct SwiftUIView: View {
             let item = Item(context: context)
             item.amountofDaysTillExpiration = Int16(daysDiff)
             item.calendarDate = selectedDaySaved
-            item.food = inputedInfo
+            item.nameOfFood = inputedInfo
             item.amount = String(amountValue)
             item.expirationNameValue = Int16(expiration)
             item.uuid = uuid
@@ -187,7 +187,7 @@ struct SwiftUIView: View {
                 }
                 objectToUpdate.amountofDaysTillExpiration = Int16(daysDiff)
                 objectToUpdate.calendarDate = selectedDaySaved
-                objectToUpdate.food = inputedInfo
+                objectToUpdate.nameOfFood = inputedInfo
                 objectToUpdate.amount = String(amountValue)
                 objectToUpdate.expirationNameValue = Int16(expiration)
                 try? moc.save()

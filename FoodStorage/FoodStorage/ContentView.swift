@@ -28,6 +28,8 @@ struct ContentView: View {
     @State private var alertForListAmount = false
     
     @State private var alertAmountInput = ""
+    
+    @State private var foodForAddingToList = ""
 
     
     var groupedFoodData: [String: [Item]] {
@@ -65,60 +67,40 @@ struct ContentView: View {
                                                 .bold()
                                             Spacer()
                                             VStack(alignment: .leading) {
-                                                Text(food.food ?? "")
+                                                Text(food.nameOfFood ?? "")
                                                 Text("\(food.amount ?? "0") left in stock")
                                                     .font(.caption)
                                                     .foregroundColor(.gray)
                                             }
-                                            
                                             .swipeActions(edge: .leading) {
                                                 Button("Add to list") {
                                                     alertForListAmount = true
-                                                    
-                                                    
+                                                    foodForAddingToList = food.nameOfFood ?? ""
                                                 }
                                             }
-                                                .alert("Input amount", isPresented: $alertForListAmount) {
-                                                    TextField("Zander", text: $alertAmountInput)
-                                                    Button("OK", role: .cancel) {
-                                                        let listing = ListGroceries(context: moc)
-                                                        listing.uuid  = UUID()
-                                                        listing.name = food.food
-                                                        listing.amount = alertAmountInput
-                                                        
-                                                        try? moc.save()
-                                                        
-                                                        alertAmountInput = ""
-                                                    }
-                                                }
-                                                                                    
                                             .tint(.black)
                                             Spacer()
                                             let dateFormatter = DateFormatter()
                                             Text(food.calendarDate ?? "")
                                                 .fixedSize()
-                                            
-                                            
-                                            
                                         }
                                         .frame(maxWidth: .infinity)
                                         .padding(.vertical, 3)
                                     }
                                     .buttonStyle(PlainButtonStyle())
-                                    .onChange(of: scenePhase) { newPhase in
-                                        switch newPhase {
-                                            case .inactive:
-                                            print("inactive")
-                                            updatingData()
-                                        case .active:
-                                            print("active")
-                                            updatingData()
-                                        case .background:
-                                            print("background")
-                                        }
-                                    }
+//                                    .onChange(of: scenePhase) { newPhase in
+//                                        switch newPhase {
+//                                            case .inactive:
+//                                            updatingData()
+//                                        case .active:
+//
+//                                            updatingData()
+//                                        case .background:
+//                                            print("background")
+//                                        }
+//                                    }
                                     .onAppear{
-                                        print("Food Name: \(food.food), id: \(food.uuid), Key \(key)")
+                                        updatingData()
                                     }
                                     
                                 }
@@ -132,6 +114,20 @@ struct ContentView: View {
                         
                     }
                     
+                }
+                .alert("Input amount", isPresented: $alertForListAmount) {
+                    TextField("Zander", text: $alertAmountInput)
+                    Button("OK", role: .cancel) {
+                        let listing = ListGroceries(context: moc)
+                        listing.uuid  = UUID()
+                        listing.name = foodForAddingToList
+                        listing.amount = alertAmountInput
+                        
+                        try? moc.save()
+                        
+                        alertAmountInput = ""
+                        foodForAddingToList = ""
+                    }
                 }
 //                .onAppear {
 //                    updatingData()
@@ -174,6 +170,7 @@ struct ContentView: View {
             for item in expiredItems {
                 let calendar = Calendar.current
                 let newDate = calendar.date(byAdding: .day, value: Int(item.amountofDaysTillExpiration), to: today)
+                print("newDate is \(newDate)")
                 let daysUntilExpiration = calendar.dateComponents([.day], from: today, to: newDate!).day ?? 0
                 switch daysUntilExpiration {
                 case ...0:
@@ -189,8 +186,10 @@ struct ContentView: View {
                 item.calendarDate = dateFormatter.string(from: newDate!)
                 let daysFromToday = calendar.dateComponents([.day], from: today, to: newDate!).day ?? 0
                 item.amountofDaysTillExpiration = Int16(daysFromToday)
+                
             }
             try moc.save()
+            
         } catch {
             print("Error updating data: \(error)")
         }

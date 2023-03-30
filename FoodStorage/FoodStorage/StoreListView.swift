@@ -19,8 +19,11 @@ struct StoreListView: View {
     @State private var inputedAmount = ""
     @State private var checkEditing = false
     
+    @State private var checkMark: Bool = false
     
     @State private var listEdit: ListGroceries? = nil
+    
+    @State private var checkMarkData: ListGroceries? = nil
     
     var body: some View {
         NavigationView {
@@ -33,15 +36,44 @@ struct StoreListView: View {
                             inputedText = list.name ?? ""
                             showAlert = true
                         }) {
+                            
                             HStack {
                                 Text(list.name ?? "")
                                 Text("\(list.amount ?? "")")
                             }
+
                         }
+                        .swipeActions(edge: .leading, allowsFullSwipe: false) {
+                            Button {
+                                checkMarkData = list
+                                list.isChecked.toggle()
+                                checkMark = list.isChecked
+                                print("checkmark is \(checkMark) ")
+                                updateCheckIcon()
+
+                                
+                                print("\(list.name) is \(list.isChecked)")
+                                print("Edit button was tapped")
+                            } label: {
+                                if list.isChecked == true {
+                                    Label("checked", systemImage: "checkmark.square")
+                                } else if list.isChecked == false {
+                                    Label("not checked", systemImage: "square")
+                                }
+                            }
+                        }
+                    
+                        .onAppear {
+                            updateCheckIcon()
+                        }
+
                     }
+
+
                     .onDelete(perform: removeListData)
+                    
                 }
-                
+
                 Button("Tap me") {
                     showAlert = true
                     
@@ -50,13 +82,43 @@ struct StoreListView: View {
                     TextField("Input Amount", text: $inputedAmount).keyboardType(.numberPad)
                     TextField("Input name", text: $inputedText)
                     Button("Save", action: {inputedData()})
-                    Button("Cancel", role: .cancel, action: {})
+                    Button("Cancel", role: .cancel, action: {
+                        inputedText = ""
+                        inputedAmount = ""
+                    })
                 }
             }
             
         }
     }
 
+    func updateCheckIcon() {
+        guard let uuid =  checkMarkData?.uuid else { return }
+            
+        let convertUUIDString = uuid.uuidString
+        guard let uuid = UUID(uuidString: convertUUIDString) else {
+            return
+        }
+            
+        let fetchRequest: NSFetchRequest<ListGroceries> = ListGroceries.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "uuid == %@", uuid as CVarArg)
+            
+        do {
+            let result = try moc.fetch(fetchRequest)
+            guard let objectToUpdate = result.first else {
+                return
+            }
+                
+            objectToUpdate.isChecked = checkMark
+            print(objectToUpdate.isChecked)
+            try? moc.save()
+                
+        } catch {
+            print("Error fetching object: \(error.localizedDescription)")
+        }
+    }
+    
+    
     func inputedData() {
         if checkEditing == false {
             let listing = ListGroceries(context: moc)
@@ -102,6 +164,7 @@ struct StoreListView: View {
         }
             
                 inputedText = ""
+                inputedAmount = ""
             }
     
 
