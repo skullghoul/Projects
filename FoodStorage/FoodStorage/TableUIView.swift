@@ -11,16 +11,16 @@ struct TableUIView: View {
     var body: some View {
         TabView {
             ContentView()
-            .tabItem {
-                Label("Menu", systemImage: "list.dash")
-            }
+                .tabItem {
+                    Label("Menu", systemImage: "list.dash")
+                }
             
-        StoreListView()
+            StoreListView()
                 .tabItem {
                     Label("Order", systemImage: "checklist")
                 }
         }.tint(.black)
-            
+        
     }
 }
 

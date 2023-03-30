@@ -23,7 +23,7 @@ struct SwiftUIView: View {
     @State private var amountValue = 1
     @State private var closeDate = false
     @State private var angle = 0.0
-
+    
     @State private var discardDateString = ""
     
     @State private var width: Bool = true
@@ -36,8 +36,8 @@ struct SwiftUIView: View {
                     selectedFood = nil
                     checkEditIsPushed = false                }
                 Spacer()
-                .interactiveDismissDisabled()
-
+                    .interactiveDismissDisabled()
+                
                 
                 Button("Save") {
                     dateAmount()
@@ -68,7 +68,7 @@ struct SwiftUIView: View {
                     Text(width ? "Tap to close" : "")
                         .font(.system(size: 10))
                         .padding(.horizontal, 10)
-
+                    
                     Button {
                         if width == true {
                             width.toggle()
@@ -95,18 +95,18 @@ struct SwiftUIView: View {
                     .font(.system(size: 10))
                     .padding(.horizontal, 10)
                 }
-                }
-                DatePicker("Expiration Date", selection: $selectedDate, in: Date()..., displayedComponents: .date)
-                    .datePickerStyle(.graphical)
-                    .frame(width: width ? .maximum(500, 30) : 0)
+            }
+            DatePicker("Expiration Date", selection: $selectedDate, in: Date()..., displayedComponents: .date)
+                .datePickerStyle(.graphical)
+                .frame(width: width ? .maximum(500, 30) : 0)
             
             TextField("Discard Product Date", text: $discardDateString)
                 .frame(width: width ? 0 : .maximum(500, 30))
-            }
+        }
         .transition(.slide)
         .transition(.scale)
         .animation(.easeInOut, value: width)
-
+        
         .onAppear {
             if let food = selectedFood {
                 inputedInfo = food.nameOfFood ?? ""
@@ -125,32 +125,32 @@ struct SwiftUIView: View {
         
         // Default value for the expiration
         var expiration = 0
-
+        
         let date = Date()
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         let selectedDaySaved = dateFormatter.string(from: selectedDate)
-
+        
         let calendar = Calendar.current
         let startOfDaySelectedDate = calendar.startOfDay(for: selectedDate)
         let startOfDayToday = calendar.startOfDay(for: date)
         let components = calendar.dateComponents([.day], from: startOfDayToday, to: startOfDaySelectedDate)
         let daysDiff = components.day ?? 0
         
-//        let changedString = dateFormatter.string(from: selectedDate)
-//        let future = dateFormatter.date(from: changedString)
-//        let timeDiff = future?.timeIntervalSinceNow
-//        let daysDiff = Int(timeDiff! / (24 * 60 * 60) + 1)
-
+        //        let changedString = dateFormatter.string(from: selectedDate)
+        //        let future = dateFormatter.date(from: changedString)
+        //        let timeDiff = future?.timeIntervalSinceNow
+        //        let daysDiff = Int(timeDiff! / (24 * 60 * 60) + 1)
+        
         let createNewUuid = UUID()
         
         let uuid = selectedFood?.uuid ?? createNewUuid
-
-
+        
+        
         var dateValue = 0
         
         dateValue = daysDiff
-
+        
         if dateValue == 0 {
             expiration = 2
         } else if dateValue <= 7 {
@@ -160,7 +160,7 @@ struct SwiftUIView: View {
         } else {
             print("failed to find dateValue unexpected number \(dateValue)")
         }
-
+        
         if checkEditIsPushed == false {
             let item = Item(context: context)
             item.amountofDaysTillExpiration = Int16(daysDiff)
@@ -199,7 +199,7 @@ struct SwiftUIView: View {
             print("failed to find checkEditIsPushed")
         }
         
-
+        
         presentSheet = false
         selectedFood = nil
         checkEditIsPushed = false

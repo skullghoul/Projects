@@ -41,19 +41,15 @@ struct StoreListView: View {
                                 Text(list.name ?? "")
                                 Text("\(list.amount ?? "")")
                             }
-
+                            
                         }
                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                             Button {
                                 checkMarkData = list
                                 list.isChecked.toggle()
                                 checkMark = list.isChecked
-                                print("checkmark is \(checkMark) ")
                                 updateCheckIcon()
-
                                 
-                                print("\(list.name) is \(list.isChecked)")
-                                print("Edit button was tapped")
                             } label: {
                                 if list.isChecked == true {
                                     Label("checked", systemImage: "checkmark.square")
@@ -62,18 +58,18 @@ struct StoreListView: View {
                                 }
                             }
                         }
-                    
+                        
                         .onAppear {
                             updateCheckIcon()
                         }
-
+                        
                     }
-
-
+                    
+                    
                     .onDelete(perform: removeListData)
                     
                 }
-
+                
                 Button("Tap me") {
                     showAlert = true
                     
@@ -91,28 +87,27 @@ struct StoreListView: View {
             
         }
     }
-
+    
     func updateCheckIcon() {
         guard let uuid =  checkMarkData?.uuid else { return }
-            
+        
         let convertUUIDString = uuid.uuidString
         guard let uuid = UUID(uuidString: convertUUIDString) else {
             return
         }
-            
+        
         let fetchRequest: NSFetchRequest<ListGroceries> = ListGroceries.fetchRequest()
         fetchRequest.predicate = NSPredicate(format: "uuid == %@", uuid as CVarArg)
-            
+        
         do {
             let result = try moc.fetch(fetchRequest)
             guard let objectToUpdate = result.first else {
                 return
             }
-                
+            
             objectToUpdate.isChecked = checkMark
-            print(objectToUpdate.isChecked)
             try? moc.save()
-                
+            
         } catch {
             print("Error fetching object: \(error.localizedDescription)")
         }
@@ -162,12 +157,12 @@ struct StoreListView: View {
         } else {
             print("failed to find checkEditIsPushed")
         }
-            
-                inputedText = ""
-                inputedAmount = ""
-            }
+        
+        inputedText = ""
+        inputedAmount = ""
+    }
     
-
+    
     
     func removeListData(at offsets: IndexSet) {
         for index in offsets {
@@ -181,7 +176,7 @@ struct StoreListView: View {
         }
     }
 }
-    
+
 struct StoreList_Previews: PreviewProvider {
     static var previews: some View {
         StoreListView()

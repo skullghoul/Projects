@@ -30,7 +30,7 @@ struct ContentView: View {
     @State private var alertAmountInput = ""
     
     @State private var foodForAddingToList = ""
-
+    
     
     var groupedFoodData: [String: [Item]] {
         Dictionary(grouping: foodData) { food in
@@ -88,17 +88,20 @@ struct ContentView: View {
                                         .padding(.vertical, 3)
                                     }
                                     .buttonStyle(PlainButtonStyle())
-//                                    .onChange(of: scenePhase) { newPhase in
-//                                        switch newPhase {
-//                                            case .inactive:
-//                                            updatingData()
-//                                        case .active:
-//
-//                                            updatingData()
-//                                        case .background:
-//                                            print("background")
-//                                        }
-//                                    }
+                                    .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
+                                                updatingData()
+                                            }
+                                    .onChange(of: scenePhase) { newPhase in
+                                        switch newPhase {
+                                        case .inactive:
+                                            updatingData()
+                                        case .active:
+                                            
+                                            updatingData()
+                                        case .background:
+                                            print("background")
+                                        }
+                                    }
                                     .onAppear{
                                         updatingData()
                                     }
@@ -109,15 +112,17 @@ struct ContentView: View {
                                     delete(at: indexSet, key: key)
                                 }
                             }
-                                
+                            
                         }
                         
                     }
                     
                 }
                 .alert("Input amount", isPresented: $alertForListAmount) {
-                    TextField("Zander", text: $alertAmountInput)
-                    Button("OK", role: .cancel) {
+                    
+                    TextField("Amount of items", text: $alertAmountInput)
+                    Button("Cancel", role: .cancel, action: {})
+                    Button("OK") {
                         let listing = ListGroceries(context: moc)
                         listing.uuid  = UUID()
                         listing.name = foodForAddingToList
@@ -129,11 +134,11 @@ struct ContentView: View {
                         foodForAddingToList = ""
                     }
                 }
-//                .onAppear {
-//                    updatingData()
-//                    print("Made it to on appear")
-//                }
-//
+                //                .onAppear {
+                //                    updatingData()
+                //                    print("Made it to on appear")
+                //                }
+                //
                 .colorMultiply(.init("Color"))
                 .scrollContentBackground(.hidden)
                 .navigationBarTitle("Food Tracker")
@@ -162,6 +167,9 @@ struct ContentView: View {
     }
     
     func updatingData() {
+        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+
+        
         let today = Date()
         let request = NSFetchRequest<Item>(entityName: "Item")
         request.predicate = NSPredicate(format: "calendarDate <= %@", today as NSDate)
@@ -170,7 +178,6 @@ struct ContentView: View {
             for item in expiredItems {
                 let calendar = Calendar.current
                 let newDate = calendar.date(byAdding: .day, value: Int(item.amountofDaysTillExpiration), to: today)
-                print("newDate is \(newDate)")
                 let daysUntilExpiration = calendar.dateComponents([.day], from: today, to: newDate!).day ?? 0
                 switch daysUntilExpiration {
                 case ...0:
@@ -195,17 +202,17 @@ struct ContentView: View {
         }
     }
     
-
+    
     
     func delete(at offsets: IndexSet, key: String) {
-//        let foodItem: Item
-//        switch key {
-//        case "Expired":
-//
-//        case "Going bad soon":
-//        case "Fresh":
-//        default: return
-//        }
+        //        let foodItem: Item
+        //        switch key {
+        //        case "Expired":
+        //
+        //        case "Going bad soon":
+        //        case "Fresh":
+        //        default: return
+        //        }
         
         
         
@@ -218,7 +225,7 @@ struct ContentView: View {
         } catch {
             print("Error updating data: \(error)")
         }
-
+        
         
     }
     

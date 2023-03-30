@@ -11,13 +11,13 @@ import SwiftUI
 @main
 struct FoodStorageApp: App {
     let persistenceController = PersistenceController.shared
-
+    
     var body: some Scene {
         WindowGroup {
             TableUIView()
-
+            
                 .environment(\.managedObjectContext, persistenceController.viewContext)
-
+            
         }
     }
 }
