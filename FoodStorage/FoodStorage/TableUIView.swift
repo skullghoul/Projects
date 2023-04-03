@@ -19,7 +19,7 @@ struct TableUIView: View {
                 .tabItem {
                     Label("Order", systemImage: "checklist")
                 }
-        }.tint(.black)
+        }.tint(Color("BurntOrange"))
         
     }
 }

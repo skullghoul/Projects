@@ -2,8 +2,8 @@
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21513" systemVersion="22D68" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Item" representedClassName="Item" syncable="YES" codeGenerationType="class">
         <attribute name="amount" optional="YES" attributeType="String"/>
-        <attribute name="amountofDaysTillExpiration" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
-        <attribute name="calendarDate" optional="YES" attributeType="String"/>
+        <attribute name="calendarDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="daysApartFromNowToSelectedDate" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="expirationNameValue" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="nameOfFood" optional="YES" attributeType="String"/>
         <attribute name="uuid" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>

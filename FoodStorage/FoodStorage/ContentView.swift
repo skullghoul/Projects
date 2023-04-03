@@ -32,6 +32,8 @@ struct ContentView: View {
     @State private var foodForAddingToList = ""
     
     
+    
+    
     var groupedFoodData: [String: [Item]] {
         Dictionary(grouping: foodData) { food in
             switch food.expirationNameValue {
@@ -43,6 +45,12 @@ struct ContentView: View {
                 return "Expired"
             }
         }
+    }
+    
+    var dateFormatter: DateFormatter {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, yyyy"
+        return formatter
     }
     
     var body: some View {
@@ -63,7 +71,7 @@ struct ContentView: View {
                                     }) {
                                         
                                         HStack {
-                                            Text("\(food.amountofDaysTillExpiration) Days")
+                                            Text("\(food.daysApartFromNowToSelectedDate) Days")
                                                 .bold()
                                             Spacer()
                                             VStack(alignment: .leading) {
@@ -80,17 +88,18 @@ struct ContentView: View {
                                             }
                                             .tint(.black)
                                             Spacer()
-                                            let dateFormatter = DateFormatter()
-                                            Text(food.calendarDate ?? "")
+                                            
+                                            Text(dateFormatter.string(from: food.calendarDate ?? Date.now))
                                                 .fixedSize()
                                         }
+                                        .foregroundColor(Color("GreenishBlue"))
                                         .frame(maxWidth: .infinity)
                                         .padding(.vertical, 3)
                                     }
                                     .buttonStyle(PlainButtonStyle())
                                     .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
-                                                updatingData()
-                                            }
+                                        updatingData()
+                                    }
                                     .onChange(of: scenePhase) { newPhase in
                                         switch newPhase {
                                         case .inactive:
@@ -116,8 +125,10 @@ struct ContentView: View {
                         }
                         
                     }
-                    
+                    .listRowBackground(Color("BlushPink"))
+                    .tint(Color("Teal"))
                 }
+                
                 .alert("Input amount", isPresented: $alertForListAmount) {
                     
                     TextField("Amount of items", text: $alertAmountInput)
@@ -139,7 +150,7 @@ struct ContentView: View {
                 //                    print("Made it to on appear")
                 //                }
                 //
-                .colorMultiply(.init("Color"))
+                
                 .scrollContentBackground(.hidden)
                 .navigationBarTitle("Food Tracker")
                 .navigationBarItems(trailing: Toggle(isOn: $presentSheet) {
@@ -152,10 +163,11 @@ struct ContentView: View {
                     SwiftUIView(checkEditIsPushed: $checkEditIsPushed, presentSheet: $presentSheet, selectedFood: $selectedFood)
                 })
                 
+                
                 .background {
                     Image("orangeRed")
                         .resizable()
-                    Color.black.opacity(0.08)
+                    Color.black.opacity(0.10)
                         .frame(width: 500, height: 1100)
                 }
                 
@@ -168,39 +180,67 @@ struct ContentView: View {
     
     func updatingData() {
         let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-
         
-        let today = Date()
-        let request = NSFetchRequest<Item>(entityName: "Item")
-        request.predicate = NSPredicate(format: "calendarDate <= %@", today as NSDate)
+        let today = Date.now
+        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "calendarDate >= %@", today as NSDate)
         do {
-            let expiredItems = try moc.fetch(request)
-            for item in expiredItems {
+            let items = try moc.fetch(fetchRequest)
+            for item in items {
+                let date = Date()
                 let calendar = Calendar.current
-                let newDate = calendar.date(byAdding: .day, value: Int(item.amountofDaysTillExpiration), to: today)
-                let daysUntilExpiration = calendar.dateComponents([.day], from: today, to: newDate!).day ?? 0
-                switch daysUntilExpiration {
+                let startOfDaySelectedDate = calendar.startOfDay(for: item.calendarDate ?? Date())
+                let startOfDayToday = calendar.startOfDay(for: date)
+                let components = calendar.dateComponents([.day], from: startOfDayToday, to: startOfDaySelectedDate)
+                let daysDiff = components.day ?? 0
+                print("DaysDiff = \(daysDiff)")
+                
+                item.daysApartFromNowToSelectedDate = Int16(daysDiff)
+                
+                switch item.daysApartFromNowToSelectedDate {
                 case ...0:
                     item.expirationNameValue = 2 // "Expired"
-                case 1...3:
+                case 1...7:
                     item.expirationNameValue = 1 // "Going bad soon"
                 default:
                     item.expirationNameValue = 0 // "Fresh"
                 }
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateStyle = .short
-                dateFormatter.timeStyle = .none
-                item.calendarDate = dateFormatter.string(from: newDate!)
-                let daysFromToday = calendar.dateComponents([.day], from: today, to: newDate!).day ?? 0
-                item.amountofDaysTillExpiration = Int16(daysFromToday)
-                
             }
             try moc.save()
-            
         } catch {
             print("Error updating data: \(error)")
         }
     }
+    
+    //    func updatingData() {
+    //        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
+    //
+    //        let today = Date.now
+    //        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+    //        fetchRequest.predicate = NSPredicate(format: "calendarDate >= %@", today as NSDate)
+    //        do {
+    //            let expiredItems = try moc.fetch(fetchRequest)
+    //            for item in expiredItems {
+    //                let calendar = Calendar.current
+    //                let newDate = calendar.date(byAdding: .day, value: Int(item.daysApartFromNowToSelectedDate), to: today)
+    //                let daysUntilExpiration = calendar.dateComponents([.day], from: today, to: newDate!).day ?? 0
+    //                switch daysUntilExpiration {
+    //                case ...0:
+    //                    item.expirationNameValue = 2 // "Expired"
+    //                case 1...3:
+    //                    item.expirationNameValue = 1 // "Going bad soon"
+    //                default:
+    //                    item.expirationNameValue = 0 // "Fresh"
+    //                }
+    //                item.calendarDate = newDate
+    //                let daysFromToday = calendar.dateComponents([.day], from: today, to: newDate!).day ?? 0
+    //                item.daysApartFromNowToSelectedDate = Int16(daysFromToday)
+    //            }
+    //            try moc.save()
+    //        } catch {
+    //            print("Error updating data: \(error)")
+    //        }
+    //    }
     
     
     

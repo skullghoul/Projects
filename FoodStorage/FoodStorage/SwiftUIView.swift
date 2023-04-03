@@ -114,15 +114,12 @@ struct SwiftUIView: View {
                 
                 let dateFormatter = DateFormatter()
                 dateFormatter.dateFormat = "MM/dd/yy"
-                selectedDate = dateFormatter.date(from: food.calendarDate ?? "") ?? Date()
+                selectedDate = food.calendarDate ?? Date()
             }
         }
     }
     
     func dateAmount() {
-        
-        
-        
         // Default value for the expiration
         var expiration = 0
         
@@ -137,21 +134,13 @@ struct SwiftUIView: View {
         let components = calendar.dateComponents([.day], from: startOfDayToday, to: startOfDaySelectedDate)
         let daysDiff = components.day ?? 0
         
-        //        let changedString = dateFormatter.string(from: selectedDate)
-        //        let future = dateFormatter.date(from: changedString)
-        //        let timeDiff = future?.timeIntervalSinceNow
-        //        let daysDiff = Int(timeDiff! / (24 * 60 * 60) + 1)
-        
         let createNewUuid = UUID()
-        
         let uuid = selectedFood?.uuid ?? createNewUuid
         
-        
         var dateValue = 0
-        
         dateValue = daysDiff
         
-        if dateValue == 0 {
+        if dateValue <= 0 {
             expiration = 2
         } else if dateValue <= 7 {
             expiration = 1
@@ -163,8 +152,8 @@ struct SwiftUIView: View {
         
         if checkEditIsPushed == false {
             let item = Item(context: context)
-            item.amountofDaysTillExpiration = Int16(daysDiff)
-            item.calendarDate = selectedDaySaved
+            item.daysApartFromNowToSelectedDate = Int16(daysDiff)
+            item.calendarDate = selectedDate // Updated line
             item.nameOfFood = inputedInfo
             item.amount = String(amountValue)
             item.expirationNameValue = Int16(expiration)
@@ -185,8 +174,8 @@ struct SwiftUIView: View {
                 guard let objectToUpdate = result.first else {
                     return
                 }
-                objectToUpdate.amountofDaysTillExpiration = Int16(daysDiff)
-                objectToUpdate.calendarDate = selectedDaySaved
+                objectToUpdate.daysApartFromNowToSelectedDate = Int16(daysDiff)
+                objectToUpdate.calendarDate = selectedDate // Updated line
                 objectToUpdate.nameOfFood = inputedInfo
                 objectToUpdate.amount = String(amountValue)
                 objectToUpdate.expirationNameValue = Int16(expiration)
@@ -199,12 +188,98 @@ struct SwiftUIView: View {
             print("failed to find checkEditIsPushed")
         }
         
-        
         presentSheet = false
         selectedFood = nil
         checkEditIsPushed = false
         
     }
+    
+//    func dateAmount() {
+//
+//
+//
+//        // Default value for the expiration
+//        var expiration = 0
+//
+//        let date = Date()
+//        let dateFormatter = DateFormatter()
+//        dateFormatter.dateFormat = "MM/dd/yyyy"
+//        let selectedDaySaved = dateFormatter.string(from: selectedDate)
+//
+//        let calendar = Calendar.current
+//        let startOfDaySelectedDate = calendar.startOfDay(for: selectedDate)
+//        let startOfDayToday = calendar.startOfDay(for: date)
+//        let components = calendar.dateComponents([.day], from: startOfDayToday, to: startOfDaySelectedDate)
+//        let daysDiff = components.day ?? 0
+//
+//        //        let changedString = dateFormatter.string(from: selectedDate)
+//        //        let future = dateFormatter.date(from: changedString)
+//        //        let timeDiff = future?.timeIntervalSinceNow
+//        //        let daysDiff = Int(timeDiff! / (24 * 60 * 60) + 1)
+//
+//        let createNewUuid = UUID()
+//
+//        let uuid = selectedFood?.uuid ?? createNewUuid
+//
+//
+//        var dateValue = 0
+//
+//        dateValue = daysDiff
+//
+//        if dateValue == 0 {
+//            expiration = 2
+//        } else if dateValue <= 7 {
+//            expiration = 1
+//        } else if dateValue >= 8 {
+//            expiration = 0
+//        } else {
+//            print("failed to find dateValue unexpected number \(dateValue)")
+//        }
+//
+//        if checkEditIsPushed == false {
+//            let item = Item(context: context)
+//            item.amountofDaysTillExpiration = Int16(daysDiff)
+//            item.calendarDate = selectedDaySaved
+//            item.nameOfFood = inputedInfo
+//            item.amount = String(amountValue)
+//            item.expirationNameValue = Int16(expiration)
+//            item.uuid = uuid
+//            try? moc.save()
+//        } else if checkEditIsPushed == true {
+//
+//            let convertUUIDString = uuid.uuidString
+//            guard let uuid = UUID(uuidString: convertUUIDString) else {
+//                return
+//            }
+//
+//            let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
+//            fetchRequest.predicate = NSPredicate(format: "uuid == %@", uuid as CVarArg)
+//
+//            do {
+//                let result = try moc.fetch(fetchRequest)
+//                guard let objectToUpdate = result.first else {
+//                    return
+//                }
+//                objectToUpdate.amountofDaysTillExpiration = Int16(daysDiff)
+//                objectToUpdate.calendarDate = selectedDaySaved
+//                objectToUpdate.nameOfFood = inputedInfo
+//                objectToUpdate.amount = String(amountValue)
+//                objectToUpdate.expirationNameValue = Int16(expiration)
+//                try? moc.save()
+//            } catch {
+//                print("Error fetching object: \(error.localizedDescription)")
+//            }
+//
+//        } else {
+//            print("failed to find checkEditIsPushed")
+//        }
+//
+//
+//        presentSheet = false
+//        selectedFood = nil
+//        checkEditIsPushed = false
+//
+//    }
     
 }
 
