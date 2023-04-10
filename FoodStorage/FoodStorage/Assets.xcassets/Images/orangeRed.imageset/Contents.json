@@ -1,7 +1,6 @@
 {
   "images" : [
     {
-      "filename" : "limeG2.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
@@ -39,6 +38,7 @@
           "value" : "light"
         }
       ],
+      "filename" : "lessVissilbeLightMode.png",
       "idiom" : "universal",
       "scale" : "2x"
     },

@@ -12,6 +12,8 @@ struct StoreListView: View {
     
     @Environment(\.managedObjectContext) var moc
     
+    @Environment(\.colorScheme) var colorScheme
+    
     @FetchRequest(sortDescriptors: []) var lists: FetchedResults<ListGroceries>
     
     @State private var showAlert = false
@@ -29,19 +31,51 @@ struct StoreListView: View {
         NavigationView {
             VStack {
                 List {
+                    
                     ForEach(lists, id: \.uuid) { list in
-                        Button(action: {
-                            checkEditing = true
-                            listEdit = list
-                            inputedText = list.name ?? ""
-                            showAlert = true
-                        }) {
+                        HStack {
                             
-                            HStack {
-                                Text(list.name ?? "")
-                                Text("\(list.amount ?? "")")
+                            
+                            Button(action: {
+                                
+                            }) {
+                                
+                                HStack() {
+                                    Text(list.name ?? "")
+                                        .multilineTextAlignment(.leading)
+                                        .frame(width: 100)
+                                    
+                                    
+                                    
+                                    Text("Quantity:   \(list.amount ?? "")")
+                                        .multilineTextAlignment(.center)
+                                        .frame(width: 100)
+                                    
+                                    
+                                }
+                            }
+                            .onTapGesture {
+                                print("quantity pressed")
+                                checkEditing = true
+                                listEdit = list
+                                inputedText = list.name ?? ""
+                                inputedAmount = list.amount ?? ""
+                                showAlert = true
                             }
                             
+                            
+                            
+                            Button {
+                            } label: {
+                                Image(systemName: list.isChecked ? "checkmark" : "square")
+                                    .foregroundColor(list.isChecked ? .green : .black)
+                            }
+                            .frame(width: 100)
+                            .onTapGesture {
+                                list.isChecked.toggle()
+                                checkMark = list.isChecked
+                                print("Checkmark Button pressed")
+                            }
                         }
                         .swipeActions(edge: .leading, allowsFullSwipe: false) {
                             Button {
@@ -49,43 +83,68 @@ struct StoreListView: View {
                                 list.isChecked.toggle()
                                 checkMark = list.isChecked
                                 updateCheckIcon()
-                                
+                                print("Swipe Action")
                             } label: {
-                                if list.isChecked == true {
-                                    Label("checked", systemImage: "checkmark.square")
-                                } else if list.isChecked == false {
-                                    Label("not checked", systemImage: "square")
-                                }
+                                Label(
+                                    title: {
+                                        Text(list.isChecked ? "checked" : "not checked")
+                                    },
+                                    icon: {
+                                        ZStack {
+                                            Circle()
+                                                .stroke(Color.black, lineWidth: 2)
+                                            
+                                            Image(systemName: list.isChecked ? "checkmark" : "square")
+                                            
+                                        }
+                                        .frame(width: 25, height: 25)
+                                    }
+                                )
                             }
+                            
                         }
+                        .tint(list.isChecked ? .green : .black)
+                        
+                        
                         
                         .onAppear {
                             updateCheckIcon()
                         }
                         
                     }
-                    
+
+
                     
                     .onDelete(perform: removeListData)
-                    
+                    .listRowBackground(LinearGradient(gradient: Gradient(colors: [.blue, .white, .pink]), startPoint: .leading, endPoint: .trailing))
                 }
-                
+
+
+                .navigationBarTitle("Grocery List")
+
+
                 Button("Tap me") {
                     showAlert = true
                     
                 }
-                .alert("Zander", isPresented: $showAlert) {
-                    TextField("Input Amount", text: $inputedAmount).keyboardType(.numberPad)
-                    TextField("Input name", text: $inputedText)
-                    Button("Save", action: {inputedData()})
-                    Button("Cancel", role: .cancel, action: {
-                        inputedText = ""
-                        inputedAmount = ""
-                    })
-                }
+                
             }
+
+            .alert("Zander", isPresented: $showAlert) {
+                TextField("Input name", text: $inputedText)
+                TextField("Input Amount", text: $inputedAmount).keyboardType(.numberPad)
+                Button("Save", action: {inputedData()})
+                Button("Cancel", role: .cancel, action: {
+                    checkEditing = false
+                    showAlert = false
+                    inputedText = ""
+                    inputedAmount = ""
+                })
+            }
+
             
         }
+
     }
     
     func updateCheckIcon() {
@@ -124,6 +183,7 @@ struct StoreListView: View {
             try? moc.save()
             
             inputedText = ""
+            inputedAmount = ""
             
         } else if checkEditing == true {
             let uuid = listEdit?.uuid

@@ -4,7 +4,6 @@
 //
 //  Created by Zander Ewell on 3/5/23.
 //
-
 import CoreData
 import SwiftUI
 
@@ -13,6 +12,9 @@ struct ContentView: View {
     @Environment(\.scenePhase) var scenePhase
     
     @Environment(\.managedObjectContext) var moc
+    
+    @Environment(\.colorScheme) var colorScheme
+
     
     @FetchRequest(sortDescriptors: []) var foodData: FetchedResults<Item>
     
@@ -74,8 +76,8 @@ struct ContentView: View {
                                             Text("\(food.daysApartFromNowToSelectedDate) Days")
                                                 .bold()
                                             Spacer()
-                                            VStack(alignment: .leading) {
-                                                Text(food.nameOfFood ?? "")
+                                            VStack(alignment: .center) {
+                                                Text(food.nameOfFood ?? "").font(.system(size: 20)).foregroundColor(colorScheme == .dark ? Color("ForegroundColorForName") : .pink)
                                                 Text("\(food.amount ?? "0") left in stock")
                                                     .font(.caption)
                                                     .foregroundColor(.gray)
@@ -100,17 +102,17 @@ struct ContentView: View {
                                     .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                                         updatingData()
                                     }
-                                    .onChange(of: scenePhase) { newPhase in
-                                        switch newPhase {
-                                        case .inactive:
-                                            updatingData()
-                                        case .active:
-                                            
-                                            updatingData()
-                                        case .background:
-                                            print("background")
-                                        }
-                                    }
+//                                    .onChange(of: scenePhase) { newPhase in
+//                                        switch newPhase {
+//                                        case .inactive:
+//                                            updatingData()
+//                                        case .active:
+//                                            
+//                                            updatingData()
+//                                        case .background:
+//                                            print("background")
+//                                        }
+//                                    }
                                     .onAppear{
                                         updatingData()
                                     }
@@ -125,7 +127,7 @@ struct ContentView: View {
                         }
                         
                     }
-                    .listRowBackground(Color("BlushPink"))
+                    .listRowBackground(Color("BackgroundOfContentViewList"))
                     .tint(Color("Teal"))
                 }
                 
@@ -157,8 +159,8 @@ struct ContentView: View {
                     Image("PlusOneButton")
                         .resizable()
                         .frame(width: 70, height: 70)
+
                 })
-                
                 .sheet(isPresented: $presentSheet, content: {
                     SwiftUIView(checkEditIsPushed: $checkEditIsPushed, presentSheet: $presentSheet, selectedFood: $selectedFood)
                 })
@@ -278,7 +280,3 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
-
-
-
-

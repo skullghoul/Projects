@@ -12,14 +12,15 @@ struct TableUIView: View {
         TabView {
             ContentView()
                 .tabItem {
-                    Label("Menu", systemImage: "list.dash")
+                    Label("Food Tracker", systemImage: "list.dash")
                 }
             
             StoreListView()
                 .tabItem {
-                    Label("Order", systemImage: "checklist")
+                    Label("Grocery List", systemImage: "checklist")
                 }
         }.tint(Color("BurntOrange"))
+            .foregroundColor(Color("ForegroundForTableView"))
         
     }
 }
