@@ -14,7 +14,7 @@ struct ContentView: View {
     @Environment(\.managedObjectContext) var moc
     
     @Environment(\.colorScheme) var colorScheme
-
+    
     
     @FetchRequest(sortDescriptors: []) var foodData: FetchedResults<Item>
     
@@ -102,17 +102,7 @@ struct ContentView: View {
                                     .onReceive(NotificationCenter.default.publisher(for: UIApplication.willEnterForegroundNotification)) { _ in
                                         updatingData()
                                     }
-//                                    .onChange(of: scenePhase) { newPhase in
-//                                        switch newPhase {
-//                                        case .inactive:
-//                                            updatingData()
-//                                        case .active:
-//
-//                                            updatingData()
-//                                        case .background:
-//                                            print("background")
-//                                        }
-//                                    }
+                                    
                                     .onAppear{
                                         updatingData()
                                     }
@@ -147,11 +137,6 @@ struct ContentView: View {
                         foodForAddingToList = ""
                     }
                 }
-                //                .onAppear {
-                //                    updatingData()
-                //                    print("Made it to on appear")
-                //                }
-                //
                 
                 .scrollContentBackground(.hidden)
                 .navigationBarTitle("Food Tracker")
@@ -159,7 +144,7 @@ struct ContentView: View {
                     Image("PlusOneButton")
                         .resizable()
                         .frame(width: 70, height: 70)
-
+                    
                 })
                 .sheet(isPresented: $presentSheet, content: {
                     SwiftUIView(checkEditIsPushed: $checkEditIsPushed, presentSheet: $presentSheet, selectedFood: $selectedFood)
@@ -172,10 +157,6 @@ struct ContentView: View {
                     Color.black.opacity(0.10)
                         .frame(width: 500, height: 1100)
                 }
-                
-                
-                
-                
             }
         }
     }
@@ -214,49 +195,8 @@ struct ContentView: View {
         }
     }
     
-    //    func updatingData() {
-    //        let paths = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)
-    //
-    //        let today = Date.now
-    //        let fetchRequest: NSFetchRequest<Item> = Item.fetchRequest()
-    //        fetchRequest.predicate = NSPredicate(format: "calendarDate >= %@", today as NSDate)
-    //        do {
-    //            let expiredItems = try moc.fetch(fetchRequest)
-    //            for item in expiredItems {
-    //                let calendar = Calendar.current
-    //                let newDate = calendar.date(byAdding: .day, value: Int(item.daysApartFromNowToSelectedDate), to: today)
-    //                let daysUntilExpiration = calendar.dateComponents([.day], from: today, to: newDate!).day ?? 0
-    //                switch daysUntilExpiration {
-    //                case ...0:
-    //                    item.expirationNameValue = 2 // "Expired"
-    //                case 1...3:
-    //                    item.expirationNameValue = 1 // "Going bad soon"
-    //                default:
-    //                    item.expirationNameValue = 0 // "Fresh"
-    //                }
-    //                item.calendarDate = newDate
-    //                let daysFromToday = calendar.dateComponents([.day], from: today, to: newDate!).day ?? 0
-    //                item.daysApartFromNowToSelectedDate = Int16(daysFromToday)
-    //            }
-    //            try moc.save()
-    //        } catch {
-    //            print("Error updating data: \(error)")
-    //        }
-    //    }
-    
-    
     
     func delete(at offsets: IndexSet, key: String) {
-        //        let foodItem: Item
-        //        switch key {
-        //        case "Expired":
-        //
-        //        case "Going bad soon":
-        //        case "Fresh":
-        //        default: return
-        //        }
-        
-        
         
         for index in offsets {
             guard let item = groupedFoodData[key]?[index] else { return }

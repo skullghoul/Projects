@@ -112,24 +112,24 @@ struct StoreListView: View {
                         }
                         
                     }
-
-
+                    
+                    
                     
                     .onDelete(perform: removeListData)
                     .listRowBackground(colorScheme == .dark ? Color("ForegroundColorForName") : Color("PrettyListColor"))
                 }
-
-
+                
+                
                 .navigationBarTitle("Grocery List")
-
-
+                
+                
                 Button("Tap me") {
                     showAlert = true
                     
                 }
                 
             }
-
+            
             .alert("Zander", isPresented: $showAlert) {
                 TextField("Input name", text: $inputedText)
                 TextField("Input Amount", text: $inputedAmount).keyboardType(.numberPad)
@@ -141,10 +141,10 @@ struct StoreListView: View {
                     inputedAmount = ""
                 })
             }
-
+            
             
         }
-
+        
     }
     
     func updateCheckIcon() {
