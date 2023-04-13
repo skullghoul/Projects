@@ -97,3 +97,20 @@ dateAmount()
 //
 //print(dictionary)
 
+
+
+
+let formatter = NumberFormatter()
+formatter.numberStyle = .percent
+formatter.minimumIntegerDigits = 1
+formatter.maximumIntegerDigits = 1
+formatter.maximumFractionDigits = 3
+
+var values =  [1.623,1.614,1.591,1.577,1.600,1.579,1.622, 0.89]
+values.reverse()
+let percentages = [0] + zip(values, values.dropFirst()).map {
+    (old, new) in
+    return (100.0 * (new - old) / old)
+}
+
+print(percentages.compactMap { formatter.string(from: NSNumber(value: $0 / 100.0)) })

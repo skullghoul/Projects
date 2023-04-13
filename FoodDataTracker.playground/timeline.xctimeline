@@ -3,12 +3,30 @@
    version = "3.0">
    <TimelineItems>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "file:///Users/zanderewell/Desktop/Projects/FoodDataTracker.playground#CharacterRangeLen=1&amp;CharacterRangeLoc=1986&amp;EndingColumnNumber=0&amp;EndingLineNumber=77&amp;StartingColumnNumber=0&amp;StartingLineNumber=76&amp;Timestamp=700019316.592544"
+         documentLocation = "file:///Users/zanderewell/Desktop/Projects/FoodDataTracker.playground#CharacterRangeLen=0&amp;CharacterRangeLoc=2567&amp;EndingColumnNumber=0&amp;EndingLineNumber=101&amp;StartingColumnNumber=0&amp;StartingLineNumber=101&amp;Timestamp=702914091.880824"
          selectedRepresentationIndex = "0">
       </LoggerValueHistoryTimelineItem>
       <LoggerValueHistoryTimelineItem
-         documentLocation = "file:///Users/zanderewell/Desktop/Projects/FoodDataTracker.playground#CharacterRangeLen=128&amp;CharacterRangeLoc=1335&amp;EndingColumnNumber=4&amp;EndingLineNumber=47&amp;StartingColumnNumber=4&amp;StartingLineNumber=43&amp;Timestamp=700019316.592767"
+         documentLocation = "file:///Users/zanderewell/Desktop/Projects/FoodDataTracker.playground#CharacterRangeLen=463&amp;CharacterRangeLoc=2568&amp;EndingColumnNumber=0&amp;EndingLineNumber=116&amp;StartingColumnNumber=0&amp;StartingLineNumber=102&amp;Timestamp=702914091.880898"
          selectedRepresentationIndex = "0">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/zanderewell/Desktop/Projects/FoodDataTracker.playground#CharacterRangeLen=463&amp;CharacterRangeLoc=2568&amp;EndingColumnNumber=0&amp;EndingLineNumber=116&amp;StartingColumnNumber=0&amp;StartingLineNumber=102&amp;Timestamp=702914091.880955"
+         selectedRepresentationIndex = "0">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "file:///Users/zanderewell/Desktop/Projects/FoodDataTracker.playground#CharacterRangeLen=463&amp;CharacterRangeLoc=2568&amp;EndingColumnNumber=0&amp;EndingLineNumber=116&amp;StartingColumnNumber=0&amp;StartingLineNumber=102&amp;Timestamp=702914091.880995"
+         selectedRepresentationIndex = "0">
+      </LoggerValueHistoryTimelineItem>
+   </TimelineItems>
+   <TimelineItems>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "documentLocation"
+         selectedRepresentationIndex = "selectedRepresentationIndex">
+      </LoggerValueHistoryTimelineItem>
+      <LoggerValueHistoryTimelineItem
+         documentLocation = "documentLocation"
+         selectedRepresentationIndex = "selectedRepresentationIndex">
       </LoggerValueHistoryTimelineItem>
    </TimelineItems>
 </Timeline>

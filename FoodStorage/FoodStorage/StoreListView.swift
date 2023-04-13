@@ -41,13 +41,13 @@ struct StoreListView: View {
                             }) {
                                 
                                 HStack() {
-                                    Text(list.name ?? "")
+                                    Text(list.name ?? "").foregroundColor(colorScheme == .dark ? Color("Coral") : .pink)
                                         .multilineTextAlignment(.leading)
                                         .frame(width: 100)
                                     
                                     
                                     
-                                    Text("Quantity:   \(list.amount ?? "")")
+                                    Text("Quantity:   \(list.amount ?? "")").foregroundColor(colorScheme == .dark ? Color("Coral") : .pink)
                                         .multilineTextAlignment(.center)
                                         .frame(width: 100)
                                     
@@ -116,7 +116,7 @@ struct StoreListView: View {
 
                     
                     .onDelete(perform: removeListData)
-                    .listRowBackground(LinearGradient(gradient: Gradient(colors: [.blue, .white, .pink]), startPoint: .leading, endPoint: .trailing))
+                    .listRowBackground(colorScheme == .dark ? Color("ForegroundColorForName") : Color("PrettyListColor"))
                 }
 
 

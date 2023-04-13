@@ -61,7 +61,11 @@ struct SwiftUIView: View {
                 }
                 Spacer()
                 TextField("Input Name of Item (ex. Carrots)", text: $inputedInfo)
+                    .foregroundColor(.blue)
+                    .frame(height: 35)
+                    .background(.bar)
             }
+            
 
             .onReceive(keyboardPublisher) { value in
                 print()
@@ -85,6 +89,7 @@ struct SwiftUIView: View {
                     .pickerStyle(WheelPickerStyle())
                     .frame(width: 160, height: 250)
                 }
+                .foregroundColor(Color.blue)
                 Spacer()
             }
 //            HStack {
@@ -126,7 +131,9 @@ struct SwiftUIView: View {
             VStack {
                 DatePicker("Expiration Date", selection: $selectedDate, in: Date()..., displayedComponents: .date)
                     .datePickerStyle(.graphical)
+                    
                     .frame(width: isKeyboardPresented ? 0 : 340, height: isKeyboardPresented ? 0 : 320)
+
                     .background {
                         Color("SkyBlueSWUIView")
 

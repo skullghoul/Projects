@@ -107,7 +107,7 @@ struct ContentView: View {
 //                                        case .inactive:
 //                                            updatingData()
 //                                        case .active:
-//                                            
+//
 //                                            updatingData()
 //                                        case .background:
 //                                            print("background")
